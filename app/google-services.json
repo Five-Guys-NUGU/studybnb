@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "898811079440",
+    "project_id": "studybnb-5989a",
+    "storage_bucket": "studybnb-5989a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:898811079440:android:4df448aafae0f6f97cd395",
+        "android_client_info": {
+          "package_name": "com.example.studybnb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "898811079440-lkinojhd7q902j31fc41adbic6p8g98p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNqvZfNiFrMBT8scXEldeQjSxUcaXoepA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "898811079440-lkinojhd7q902j31fc41adbic6p8g98p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
