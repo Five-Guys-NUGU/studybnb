@@ -37,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
             val string = "hanyangfiveguys@gmail.com"
             val address = arrayOf(string)
             intent.putExtra(Intent.EXTRA_EMAIL, address)
-            intent.putExtra(Intent.EXTRA_SUBJECT, "StudyBNB 문의")
+            intent.putExtra(Intent.EXTRA_SUBJECT, "StudyBNB 관련 문의")
             intent.putExtra(Intent.EXTRA_TEXT, "문의 내용을 작성하세요")
 
             startActivity(intent)
