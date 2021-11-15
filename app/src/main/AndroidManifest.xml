@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudyBNB">
         <activity
+            android:name=".NoteListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".NoteWriteActivity"
+            android:exported="true" />
+        <activity
             android:name=".SettingActivity"
             android:exported="true" />
         <activity
