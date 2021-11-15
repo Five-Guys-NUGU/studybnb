@@ -3,7 +3,7 @@
 - Android Gradle Plugin Version : 7.0.2
 - Gradle Version 7.0.2
 
-### 파이어베이스 계정 knurling에 안드로이드 스튜디오 sha1 key 등록하기
+### 파이어베이스 계정에 안드로이드 스튜디오 sha1 key 등록하기
 
 ![image](https://user-images.githubusercontent.com/70128377/141714850-f6317f38-dd8b-478a-b445-ce740545ea31.png)
 
