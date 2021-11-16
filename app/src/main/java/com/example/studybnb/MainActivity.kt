@@ -11,8 +11,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         timer_btn.setOnClickListener {
-//            val intent = Intent(this, TimerActivity::class.java)
-//            startActivity(intent)
+            val intent = Intent(this, TimerActivity::class.java)
+            startActivity(intent)
         }
 
         note_btn.setOnClickListener {
