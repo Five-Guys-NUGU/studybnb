@@ -4,10 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Download/StudyBNB2/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.21851851851851853" />
+        <entry key="..\:/Download/StudyBNB2/app/src/main/res/layout/activity_info.xml" value="0.25" />
         <entry key="..\:/Download/StudyBNB2/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/Download/StudyBNB2/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Download/StudyBNB2/app/src/main/res/layout/activity_note.xml" value="0.25" />
         <entry key="..\:/Download/StudyBNB2/app/src/main/res/layout/activity_note_list.xml" value="0.16843971631205673" />
+        <entry key="..\:/Download/StudyBNB2/app/src/main/res/layout/activity_note_write.xml" value="0.18206521739130435" />
         <entry key="..\:/Download/StudyBNB2/app/src/main/res/layout/activity_setting.xml" value="0.22" />
         <entry key="..\:/Download/StudyBNB2/app/src/main/res/layout/activity_splash.xml" value="0.22" />
       </map>
