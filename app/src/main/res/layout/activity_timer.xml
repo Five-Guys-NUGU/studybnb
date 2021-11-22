@@ -52,24 +52,23 @@
         android:textColor="@color/white"/>
 
     <Button
-        android:id="@+id/pause_timer_btn"
+        android:id="@+id/break_timer_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:backgroundTint="@color/gray"
-        android:text="Pause"
-        android:onClick="pauseTimer"
+        android:text="Break"
+        android:onClick="breakTimer"
         android:textSize="40dp"
         android:textColor="@color/white"/>
 
     <Button
-        android:id="@+id/reset_timer_btn"
+        android:id="@+id/finish_timer_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:backgroundTint="@color/gray"
-        android:text="Reset"
-        android:onClick="resetTimer"
+        android:text="Finish"
         android:textSize="40dp"
         android:textColor="@color/white"/>
 
