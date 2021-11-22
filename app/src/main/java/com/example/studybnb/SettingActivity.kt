@@ -17,6 +17,11 @@ class SettingActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         email_txt.setText(auth.currentUser?.email)
 
+        info_btn.setOnClickListener{
+            var intent = Intent(this, InfoActivity::class.java)
+            startActivity(intent)
+        }
+
         signOut_btn.setOnClickListener {
             auth.signOut()
             Toast.makeText(this,"로그아웃 완료", Toast.LENGTH_SHORT).show()

@@ -16,8 +16,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         note_btn.setOnClickListener {
-//            val intent = Intent(this, MyNoteActivity::class.java)
-//            startActivity(intent)
+            val intent = Intent(this, NoteListActivity::class.java)
+            startActivity(intent)
         }
 
         setting_btn.setOnClickListener {
