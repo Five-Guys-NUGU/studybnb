@@ -5,16 +5,13 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
-import android.nfc.cardemulation.HostNfcFService
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.widget.DatePicker
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import kotlinx.android.synthetic.main.activity_info.*
 import kotlinx.android.synthetic.main.activity_info.back_btn
 import kotlinx.android.synthetic.main.activity_note_write.*
 import java.text.SimpleDateFormat
@@ -76,8 +73,8 @@ class NoteWriteActivity : AppCompatActivity() {
             var noteModel = NoteModel()
             noteModel.UID = auth?.currentUser?.uid
             noteModel.date = cal.timeInMillis
-            noteModel.title = title_txt.text.toString()
-            noteModel.contents=contents_txt.text.toString()
+            noteModel.title = title_view.text.toString()
+            noteModel.contents=contents_view.text.toString()
 
 
             firestore?.collection("Records")?.document("record_${auth?.currentUser?.uid}_${cal.timeInMillis}")?.set(noteModel)

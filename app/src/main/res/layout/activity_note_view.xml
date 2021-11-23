@@ -46,7 +46,7 @@
                 android:layout_width="300dp"
                 android:layout_height="400dp"
                 android:id="@+id/img_view"
-                android:background="@color/white"
+                android:background="@drawable/photo_default"
                 android:layout_gravity="center_horizontal"
                 />
 
@@ -61,11 +61,11 @@
             <TextView
                 android:layout_width="300dp"
                 android:layout_height="40dp"
-                android:id="@+id/title_txt"
+                android:id="@+id/title_view"
                 android:layout_marginTop="10dp"
                 android:background="@color/white"
                 android:gravity="center"
-                android:textColor="@color/dark_brown"
+                android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <TextView
@@ -77,13 +77,13 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/date_txt"
+                android:id="@+id/date_view"
                 android:layout_width="300dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:background="@color/white"
                 android:gravity="center"
-                android:textColor="@color/dark_brown"
+                android:textColor="@color/black"
                 android:textSize="15sp" />
 
 
@@ -98,7 +98,7 @@
             <TextView
                 android:layout_width="300dp"
                 android:layout_height="200dp"
-                android:id="@+id/contents_txt"
+                android:id="@+id/contents_view"
                 android:layout_marginTop="10dp"
                 android:background="@color/white"
                 android:gravity="center"

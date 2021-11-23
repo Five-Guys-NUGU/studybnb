@@ -25,18 +25,27 @@ class NoteViewActivity : AppCompatActivity() {
         storage = FirebaseStorage.getInstance()
         var date : String? = null
 
+        if(intent.hasExtra("date")){
+            date = intent.getStringExtra("date")
+        }
+        else{
+            Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show()
+        }
+
+
         back_btn.setOnClickListener {
             finish()
         }
 
-        firestore?.collection("Records")?.whereEqualTo("visit_date",date?.toLong())//1619271434933
+        firestore?.collection("Records")?.whereEqualTo("date",date?.toLong())
             ?.get()?.addOnSuccessListener { documents ->
                 for(doc in documents){
-                    title_txt.text = doc?.data?.get("note_title").toString()
-                    date_txt.text = SimpleDateFormat("yyyy.MM.dd").format(doc?.data?.get("visit_date"))
-                    contents_txt.text = doc?.data?.get("note_title").toString()
+                    title_view.text = doc?.data?.get("title").toString()
+                    date_view.text = SimpleDateFormat("yyyy.MM.dd").format(doc?.data?.get("date"))
+                    contents_view.text = doc?.data?.get("contents").toString()
 
                     var storageRef = storage?.reference?.child("images")?.child(doc?.data?.get("img_src").toString())
+
                     storageRef?.downloadUrl?.addOnSuccessListener { uri ->
                         Glide.with(applicationContext)
                             .load(uri)

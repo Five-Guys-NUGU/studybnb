@@ -59,7 +59,7 @@
             <EditText
                 android:layout_width="300dp"
                 android:layout_height="40dp"
-                android:id="@+id/title_txt"
+                android:id="@+id/title_view"
                 android:layout_marginTop="10dp"
                 android:background="@color/white"
                 android:gravity="center"
@@ -98,7 +98,7 @@
             <EditText
                 android:layout_width="300dp"
                 android:layout_height="200dp"
-                android:id="@+id/contents_txt"
+                android:id="@+id/contents_view"
                 android:layout_marginTop="10dp"
                 android:background="@color/white"
                 android:gravity="center"
