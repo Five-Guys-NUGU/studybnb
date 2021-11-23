@@ -41,7 +41,7 @@ class ItemAdapter(private val context: Context): RecyclerView.Adapter<RecyclerVi
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        var viewHolder = (holder as RecyclerView.ViewHolder).itemView
+        var viewHolder = (holder as ViewHolder).itemView
         viewHolder.list_title_txt.text = itemList[position].title
         viewHolder.list_date_txt.text = SimpleDateFormat("yyyy.MM.dd").format(itemList[position].date)
         holder.bind(itemList[position])
