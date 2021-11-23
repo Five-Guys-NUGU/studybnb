@@ -56,14 +56,14 @@
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
-            <TextView
+            <EditText
                 android:layout_width="300dp"
                 android:layout_height="40dp"
                 android:id="@+id/title_txt"
                 android:layout_marginTop="10dp"
                 android:background="@color/white"
                 android:gravity="center"
-                android:text="제목을 입력하세요"
+                android:hint="제목을 입력하세요"
                 android:textColor="@color/dark_brown"
                 android:textSize="15sp" />
 
@@ -91,7 +91,7 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="노트 작성"
+                android:text="내용"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 

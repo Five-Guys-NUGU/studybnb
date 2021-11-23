@@ -1,11 +1,14 @@
 package com.example.studybnb
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.nfc.cardemulation.HostNfcFService
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.widget.DatePicker
 import com.google.firebase.auth.FirebaseAuth
@@ -43,7 +46,6 @@ class NoteWriteActivity : AppCompatActivity() {
         }
 
         back_btn.setOnClickListener {
-
             var intent = Intent(this, NoteListActivity::class.java)
             startActivity(intent)
             finish()
@@ -70,7 +72,7 @@ class NoteWriteActivity : AppCompatActivity() {
 
         }
 
-        save_btn.setOnClickListener {
+        write_save_btn.setOnClickListener {
             var noteModel = NoteModel()
             noteModel.UID = auth?.currentUser?.uid
             noteModel.date = cal.timeInMillis
@@ -85,7 +87,29 @@ class NoteWriteActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+    }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        //프로필 사진으로 선택한 이미지 보이게 하는 과정
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(requestCode == 0 && resultCode == Activity.RESULT_OK && data != null){
+            //proceed and check what the selected image was ...
+            //선택한 이미지가 보이게 하는 과정
+            selectedPhotoUri = data.data
+            //bitmap으로 우리가 선택한 이미지에 access하기.
+            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
+
+            if(bitmap != null){
+                img_btn.setImageBitmap(bitmap)
+                //img_btn.alpha = 0f
+            }else{
+                val icon = BitmapFactory.decodeResource(getResources(), R.drawable.photo_default)
+                img_btn.setImageBitmap(icon)
+                //img_btn.alpha = 0f
+            }
+
+        }
     }
 
     private fun uploadImageToFirebaseStorage() {
