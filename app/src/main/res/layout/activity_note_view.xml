@@ -43,8 +43,8 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="300dp"
-                android:layout_height="400dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/img_view"
                 android:background="@drawable/photo_default"
                 android:layout_gravity="center_horizontal"
