@@ -44,7 +44,6 @@ class SettingActivity : AppCompatActivity() {
                 finish()
             }
             mAlertDialog.setNegativeButton("No") { dialog, id ->
-                //perform som tasks here
             }
             mAlertDialog.show()
         }

@@ -18,11 +18,13 @@ class NoteListActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         back_btn.setOnClickListener {
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP //액티비티 스택제거
             finish()
         }
         write_btn.setOnClickListener {
             var intent = Intent(this, NoteWriteActivity::class.java)
             startActivity(intent)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP //액티비티 스택제거
             finish()
         }
         val layoutManager = LinearLayoutManager(this)

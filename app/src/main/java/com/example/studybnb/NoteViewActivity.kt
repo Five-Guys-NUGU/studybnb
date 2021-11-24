@@ -34,6 +34,7 @@ class NoteViewActivity : AppCompatActivity() {
 
 
         back_btn.setOnClickListener {
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP //액티비티 스택제거
             finish()
         }
 
@@ -72,9 +73,12 @@ class NoteViewActivity : AppCompatActivity() {
                     .addOnSuccessListener {
                         Toast.makeText(this, "삭제되었습니다.",Toast.LENGTH_LONG).show()
                     }
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP //액티비티 스택제거
                 val intent = Intent(this, NoteListActivity :: class.java )
                 startActivity(intent)
                 finish()
+
+
             }
 
             mAlertDialog.setNegativeButton("No") { dialog, id ->

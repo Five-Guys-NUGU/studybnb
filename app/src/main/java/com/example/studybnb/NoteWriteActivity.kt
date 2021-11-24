@@ -9,8 +9,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.DatePicker
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.ImageProxy
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ml.vision.FirebaseVision
+import com.google.firebase.ml.vision.common.FirebaseVisionImage
+import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata
+import com.google.firebase.ml.vision.text.FirebaseVisionText
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_info.back_btn
 import kotlinx.android.synthetic.main.activity_note_write.*
@@ -45,6 +51,7 @@ class NoteWriteActivity : AppCompatActivity() {
         back_btn.setOnClickListener {
             var intent = Intent(this, NoteListActivity::class.java)
             startActivity(intent)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP //액티비티 스택제거
             finish()
         }
 
@@ -82,40 +89,49 @@ class NoteWriteActivity : AppCompatActivity() {
             uploadImageToFirebaseStorage()//사진 올리는 코드
             var intent = Intent(this, NoteListActivity::class.java)
             startActivity(intent)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP //액티비티 스택제거
             finish()
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        //프로필 사진으로 선택한 이미지 보이게 하는 과정
+        //프로필 사진으로 선택한 이미지가 보임
         super.onActivityResult(requestCode, resultCode, data)
 
         if(requestCode == 0 && resultCode == Activity.RESULT_OK && data != null){
-            //proceed and check what the selected image was ...
-            //선택한 이미지가 보이게 하는 과정
+
             selectedPhotoUri = data.data
-            //bitmap으로 우리가 선택한 이미지에 access하기.
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
 
             if(bitmap != null){
                 img_btn.setImageBitmap(bitmap)
-                //img_btn.alpha = 0f
             }else{
                 val icon = BitmapFactory.decodeResource(getResources(), R.drawable.photo_default)
                 img_btn.setImageBitmap(icon)
-                //img_btn.alpha = 0f
             }
 
+            //Create a FirebaseVisionImage object from your image/bitmap.
+            val firebaseVisionImage = FirebaseVisionImage.fromBitmap(bitmap!!)
+            val firebaseVision = FirebaseVision.getInstance()
+            val firebaseVisionTextRecognizer = firebaseVision.onDeviceTextRecognizer
+
+            //Process the Image
+            val task = firebaseVisionTextRecognizer.processImage(firebaseVisionImage)
+
+            task.addOnSuccessListener { firebaseVisionText: FirebaseVisionText ->
+                //Set recognized text from image in our TextView
+                val text = firebaseVisionText.text
+                contents_view!!.text = text
         }
     }
-
+    }
     private fun uploadImageToFirebaseStorage() {
 
         val ref = FirebaseStorage.getInstance().getReference("/images/$imgFileName")
 
         if(selectedPhotoUri == null){
             val uri = Uri.parse("android.resource://com.example.studybnb/drawable/photo_default")
-            ref.putFile(uri)//selected Photo된거 uri를 file형태로 ref에 넣음.
+            ref.putFile(uri)
                 .addOnSuccessListener {
                     ref.downloadUrl.addOnSuccessListener {
                         firestore?.collection("Records")?.document("record_${auth?.currentUser?.uid}_${cal.timeInMillis}")?.update("img_src",imgFileName)
@@ -134,4 +150,8 @@ class NoteWriteActivity : AppCompatActivity() {
                 }
         }
     }
+
+
+
+
 }

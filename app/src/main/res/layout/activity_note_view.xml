@@ -97,7 +97,7 @@
 
             <TextView
                 android:layout_width="300dp"
-                android:layout_height="200dp"
+                android:layout_height="match_parent"
                 android:id="@+id/contents_view"
                 android:layout_marginTop="10dp"
                 android:background="@color/white"
