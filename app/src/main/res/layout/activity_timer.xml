@@ -1,77 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
-    android:background="@color/studyBNB_blue"
-    tools:context=".TimerActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="studyTimerModel" type="com.example.studybnb.model.StudyTimerModel" />
+    </data>
 
-    <FrameLayout
+    <LinearLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/ivory">
+        android:layout_height="match_parent"
+        android:background="@color/studyBNB_blue"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        tools:context=".TimerActivity">
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/ivory">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="타이머"
+                android:textColor="@color/dark_brown"
+                android:textSize="30dp" />
+
+            <ImageView
+                android:id="@+id/back_btn"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="10dp"
+                android:src="@drawable/back" />
+        </FrameLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="타이머"
-            android:textSize="30dp"
-            android:textColor="@color/dark_brown"
-            android:layout_gravity="center"
-            />
-        <ImageView
-            android:layout_width="60dp"
-            android:padding="10dp"
-            android:layout_height="60dp"
-            android:src="@drawable/back"
-            android:id="@+id/back_btn"/>
-    </FrameLayout>
+            android:layout_marginTop="30dp"
+            android:text="@{studyTimerModel.subject}"
+            android:textColor="@color/ivory"
+            android:textSize="30sp" />
 
-    <Chronometer
-        android:id="@+id/chronometer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
-        android:gravity="center"
-        android:text="00:00"
-        android:textColor="@color/white"
-        android:textSize="60dp"
-        android:textStyle="bold" />
+        <Chronometer
+            android:id="@+id/chronometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="190dp"
+            android:gravity="center"
+            android:text="00:00"
+            android:textColor="@color/white"
+            android:textSize="60dp"
+            android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/start_timer_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="@color/gray"
-        android:text="Start"
-        android:onClick="startTimer"
-        android:textSize="40dp"
-        android:textColor="@color/white"/>
+        <Button
+            android:id="@+id/start_timer_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/gray"
+            android:onClick="startTimer"
+            android:text="Start"
+            android:textColor="@color/white"
+            android:textSize="40dp" />
 
-    <Button
-        android:id="@+id/break_timer_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="@color/gray"
-        android:text="Break"
-        android:onClick="breakTimer"
-        android:textSize="40dp"
-        android:textColor="@color/white"/>
+        <Button
+            android:id="@+id/break_timer_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/gray"
+            android:onClick="breakTimer"
+            android:text="Break"
+            android:textColor="@color/white"
+            android:textSize="40dp" />
 
-    <Button
-        android:id="@+id/finish_timer_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="@color/gray"
-        android:text="Finish"
-        android:textSize="40dp"
-        android:textColor="@color/white"/>
+        <Button
+            android:id="@+id/finish_timer_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/gray"
+            android:text="Finish"
+            android:textColor="@color/white"
+            android:textSize="40dp" />
 
-</LinearLayout>
+    </LinearLayout>
 
-
+</layout>

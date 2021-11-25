@@ -14,8 +14,11 @@ import android.os.Bundle
 import android.os.SystemClock
 import android.view.View
 import android.widget.Chronometer
+import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.databinding.DataBindingUtil
+import com.example.studybnb.databinding.ActivityTimerBinding
 import com.example.studybnb.model.StudyTimerModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -28,6 +31,7 @@ class TimerActivity : AppCompatActivity() {
     // Firebase setup
     private lateinit var auth: FirebaseAuth
     var firestore :FirebaseFirestore = FirebaseFirestore.getInstance()
+    var studyTimerModel = StudyTimerModel()
 
     // Timer attributes
     private lateinit var chronometer: Chronometer
@@ -40,6 +44,14 @@ class TimerActivity : AppCompatActivity() {
         setContentView(R.layout.activity_timer)
         auth = FirebaseAuth.getInstance()
 
+        // Receive value of subject and display it in the screen
+        val extraSubject = intent?.extras?.getString("subject").toString()
+        studyTimerModel.subject = extraSubject
+        val binding: ActivityTimerBinding = DataBindingUtil.setContentView(
+            this, R.layout.activity_timer)
+        binding.studyTimerModel = studyTimerModel
+
+        // Setup the timer
         chronometer = findViewById(R.id.chronometer)
         chronometer.format
 
@@ -48,13 +60,13 @@ class TimerActivity : AppCompatActivity() {
         }
 
         finish_timer_btn.setOnClickListener {
-            var studyTimerModel = StudyTimerModel()
             studyTimerModel.UID = auth?.currentUser?.uid
             studyTimerModel.study_time = (SystemClock.elapsedRealtime() - chronometer.base) / 1000
             studyTimerModel.break_time = pauseOffset / 1000
             studyTimerModel.date = LocalDate.now().toString()
 
-            firestore?.collection("StudyTimer")?.document("${auth?.currentUser?.uid}")?.set(studyTimerModel)
+            firestore?.collection("StudyTimer")?.
+            document("${studyTimerModel.date+"_"+auth?.currentUser?.uid}")?.set(studyTimerModel)
 
             chronometer.base = SystemClock.elapsedRealtime()
             pauseOffset = 0
