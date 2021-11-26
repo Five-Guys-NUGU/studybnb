@@ -7,21 +7,21 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.provider.MediaStore
 import android.widget.DatePicker
-import androidx.camera.core.ImageAnalysis
-import androidx.camera.core.ImageProxy
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
-import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata
 import com.google.firebase.ml.vision.text.FirebaseVisionText
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_info.back_btn
 import kotlinx.android.synthetic.main.activity_note_write.*
 import java.text.SimpleDateFormat
 import java.util.*
+import com.example.studybnb.model.NoteModel
+
 
 class NoteWriteActivity : AppCompatActivity() {
 
@@ -49,10 +49,7 @@ class NoteWriteActivity : AppCompatActivity() {
         }
 
         back_btn.setOnClickListener {
-            var intent = Intent(this, NoteListActivity::class.java)
-            startActivity(intent)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP //액티비티 스택제거
-            finish()
+            myStartActivity(NoteListActivity::class.java)
         }
 
         img_btn.setOnClickListener {
@@ -87,9 +84,7 @@ class NoteWriteActivity : AppCompatActivity() {
             firestore?.collection("Records")?.document("record_${auth?.currentUser?.uid}_${cal.timeInMillis}")?.set(noteModel)
 
             uploadImageToFirebaseStorage()//사진 올리는 코드
-            var intent = Intent(this, NoteListActivity::class.java)
-            startActivity(intent)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP //액티비티 스택제거
+            myStartActivity(NoteListActivity::class.java)
             finish()
         }
     }
@@ -151,7 +146,11 @@ class NoteWriteActivity : AppCompatActivity() {
         }
     }
 
-
+    private fun myStartActivity(c: Class<*>) {
+        val intent = Intent(this, c)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) //액티비티가 여러게 쌓이는 것을 방지. 뒤로가기 누르면 앱 종료.
+        startActivity(intent)
+    }
 
 
 }

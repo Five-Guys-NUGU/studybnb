@@ -34,7 +34,7 @@ class NoteViewActivity : AppCompatActivity() {
 
 
         back_btn.setOnClickListener {
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP //액티비티 스택제거
+            myStartActivity(NoteListActivity::class.java)
             finish()
         }
 
@@ -57,7 +57,6 @@ class NoteViewActivity : AppCompatActivity() {
                         Log.v("IMAGE","failed")
 
                     }
-                    //break
                 }
             }
 
@@ -73,9 +72,7 @@ class NoteViewActivity : AppCompatActivity() {
                     .addOnSuccessListener {
                         Toast.makeText(this, "삭제되었습니다.",Toast.LENGTH_LONG).show()
                     }
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP //액티비티 스택제거
-                val intent = Intent(this, NoteListActivity :: class.java )
-                startActivity(intent)
+                myStartActivity(NoteListActivity::class.java)
                 finish()
 
 
@@ -87,5 +84,11 @@ class NoteViewActivity : AppCompatActivity() {
             mAlertDialog.show()
         }
 
+    }
+
+    private fun myStartActivity(c: Class<*>) {
+        val intent = Intent(this, c)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) //액티비티가 여러게 쌓이는 것을 방지. 뒤로가기 누르면 앱 종료.
+        startActivity(intent)
     }
 }
