@@ -38,7 +38,8 @@ class NoteViewActivity : AppCompatActivity() {
             finish()
         }
 
-        firestore?.collection("Records")?.whereEqualTo("date",date?.toLong())
+//        firestore?.collection("Records")?.whereEqualTo("date",date?.toLong())
+        firestore?.collection("User")?.document("Study")?.collection("NoteTaking")?.whereEqualTo("date",date?.toLong())
             ?.get()?.addOnSuccessListener { documents ->
                 for(doc in documents){
                     title_view.text = doc?.data?.get("title").toString()
@@ -51,11 +52,8 @@ class NoteViewActivity : AppCompatActivity() {
                         Glide.with(applicationContext)
                             .load(uri)
                             .into(img_view)
-                        Log.v("IMAGE","Success")
                     }?.addOnFailureListener { //이미지 로드 실패
-                        Toast.makeText(applicationContext, "실패", Toast.LENGTH_SHORT).show()
-                        Log.v("IMAGE","failed")
-
+                        Toast.makeText(applicationContext, "이미지 로드에 실패하였습니다.", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -67,8 +65,10 @@ class NoteViewActivity : AppCompatActivity() {
                     "정말 삭제하겠습니까?")
             mAlertDialog.setPositiveButton("Yes") { dialog, id ->
                 //perform some tasks here
-                firestore.collection("Records")?.document("record_${auth.currentUser?.uid}_${date}")
-                    .delete()
+
+//                firestore.collection("Records")?.document("record_${auth.currentUser?.uid}_${date}")
+                firestore?.collection("User")?.document("Study")?.collection("NoteTaking")?.document("record_${auth.currentUser?.uid}_${date}")
+                .delete()
                     .addOnSuccessListener {
                         Toast.makeText(this, "삭제되었습니다.",Toast.LENGTH_LONG).show()
                     }
