@@ -19,8 +19,7 @@ class NoteListActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         back_btn.setOnClickListener {
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            finish()
+            myStartActivity(SubjectSelectActivity::class.java)
         }
         write_btn.setOnClickListener {
             myStartActivity(NoteWriteActivity::class.java)

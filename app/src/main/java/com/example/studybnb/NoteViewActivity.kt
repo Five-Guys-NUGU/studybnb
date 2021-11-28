@@ -39,7 +39,10 @@ class NoteViewActivity : AppCompatActivity() {
         }
 
 //        firestore?.collection("Records")?.whereEqualTo("date",date?.toLong())
-        firestore?.collection("User")?.document("Study")?.collection("NoteTaking")?.whereEqualTo("date",date?.toLong())
+//        firestore?.collection("NoteTaking : Toeic")?.document("${auth?.currentUser?.uid}_${cal.timeInMillis}")?.update("img_src",imgFileName)
+
+//        firestore?.collection("User")?.document("Study")?.collection("NoteTaking")?.whereEqualTo("date",date?.toLong())
+        firestore?.collection("NoteTaking")?.whereEqualTo("date",date?.toLong())
             ?.get()?.addOnSuccessListener { documents ->
                 for(doc in documents){
                     title_view.text = doc?.data?.get("title").toString()
@@ -66,9 +69,10 @@ class NoteViewActivity : AppCompatActivity() {
             mAlertDialog.setPositiveButton("Yes") { dialog, id ->
                 //perform some tasks here
 
-//                firestore.collection("Records")?.document("record_${auth.currentUser?.uid}_${date}")
-                firestore?.collection("User")?.document("Study")?.collection("NoteTaking")?.document("record_${auth.currentUser?.uid}_${date}")
-                .delete()
+
+//                firestore?.collection("User")?.document("Study")?.collection("NoteTaking")?.document("record_${auth.currentUser?.uid}_${date}")
+                firestore?.collection("NoteTaking")?.document("${auth.currentUser?.uid}_toeic_${date}")
+                    .delete()
                     .addOnSuccessListener {
                         Toast.makeText(this, "삭제되었습니다.",Toast.LENGTH_LONG).show()
                     }

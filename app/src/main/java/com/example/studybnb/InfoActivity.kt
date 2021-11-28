@@ -43,14 +43,21 @@ class InfoActivity : AppCompatActivity() {
             userInfoModel.gpa = gpa_txt.text.toString()
             userInfoModel.intersts = interest_txt.text.toString()
 
-            firestore?.collection("User")?.document("info_${auth?.currentUser?.uid}")?.set(userInfoModel)
+            firestore?.collection("User")?.document("${auth?.currentUser?.uid}")?.set(userInfoModel)
 
             Toast.makeText(this, "회원 정보가 등록되었습니다.", Toast.LENGTH_SHORT).show()
-            var intent = Intent(this, SettingActivity::class.java)
-            startActivity(intent)
+            myStartActivity(SettingActivity::class.java)
             finish()
 
         }
 
+
+
+    }
+
+    private fun myStartActivity(c: Class<*>) {
+        val intent = Intent(this, c)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) //액티비티가 여러게 쌓이는 것을 방지. 뒤로가기 누르면 앱 종료.
+        startActivity(intent)
     }
 }

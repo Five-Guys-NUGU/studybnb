@@ -1,4 +1,4 @@
-package com.example.studybnb
+package com.example.studybnb.model
 
 data class NoteModel(
     var UID : String? = null,
