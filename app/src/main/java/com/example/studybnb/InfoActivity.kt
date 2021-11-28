@@ -43,7 +43,7 @@ class InfoActivity : AppCompatActivity() {
             userInfoModel.gpa = gpa_txt.text.toString()
             userInfoModel.intersts = interest_txt.text.toString()
 
-            firestore?.collection("UserInfo")?.document("record_${auth?.currentUser?.uid}")?.set(userInfoModel)
+            firestore?.collection("User")?.document("info_${auth?.currentUser?.uid}")?.set(userInfoModel)
 
             Toast.makeText(this, "회원 정보가 등록되었습니다.", Toast.LENGTH_SHORT).show()
             var intent = Intent(this, SettingActivity::class.java)
