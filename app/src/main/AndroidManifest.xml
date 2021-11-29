@@ -40,6 +40,24 @@
             android:name=".MainActivity"
             android:exported="true" />
         <activity
+            android:name=".CsNoteListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".CsNoteWriteActivity"
+            android:exported="true" />
+        <activity
+            android:name=".CsNoteViewActivity"
+            android:exported="true" />
+        <activity
+            android:name=".HistoryNoteViewActivity"
+            android:exported="true" />
+        <activity
+            android:name=".HistoryNoteListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".HistoryNoteWriteActivity"
+            android:exported="true" />
+        <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
