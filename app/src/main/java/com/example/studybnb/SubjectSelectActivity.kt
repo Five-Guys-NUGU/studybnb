@@ -25,7 +25,8 @@ class SubjectSelectActivity : AppCompatActivity() {
         }
 
         subCS_btn.setOnClickListener {
-
+            myStartActivity(CsNoteListActivity::class.java)
+            finish()
         }
             
     }
