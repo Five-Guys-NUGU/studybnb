@@ -24,12 +24,7 @@ class ItemAdapter(private val context: Context): RecyclerView.Adapter<RecyclerVi
     init {
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
-//        firestore?.collection("User")?.document("Study")?.collection("NoteTaking")?.document("record_${auth?.currentUser?.uid}_${cal.timeInMillis}")?.update("img_src",imgFileName)
-
-//        firestore?.collection("Records")?.whereEqualTo("uid", auth.currentUser?.uid)//
-
-//        firestore?.collection("User")?.document("Study")?.collection("NoteTaking")?.whereEqualTo("uid", auth.currentUser?.uid)
-        firestore?.collection("NoteTaking")?.whereEqualTo("uid", auth.currentUser?.uid)
+        firestore?.collection("NoteTaking")?.document("Subjects")?.collection("Toeic")?.whereEqualTo("uid", auth.currentUser?.uid)
             ?.get()?.addOnSuccessListener { documents ->
                 itemList.clear()
                 for (doc in documents) {
