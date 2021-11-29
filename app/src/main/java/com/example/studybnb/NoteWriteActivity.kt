@@ -79,10 +79,7 @@ class NoteWriteActivity : AppCompatActivity() {
             noteModel.title = title_view.text.toString()
             noteModel.contents=contents_view.text.toString()
 
-            firestore?.collection("NoteTaking")?.document("${auth?.currentUser?.uid}_toeic_${cal.timeInMillis}")?.set(noteModel)
-
-
-//            firestore?.collection("Records")?.document("record_${auth?.currentUser?.uid}_${cal.timeInMillis}")?.set(noteModel)
+            firestore?.collection("NoteTaking")?.document("Subjects")?.collection("Toeic")?.document("${auth?.currentUser?.uid}_toeic_${cal.timeInMillis}")?.set(noteModel)
 
             uploadImageToFirebaseStorage()//사진 올리는 코드
             myStartActivity(NoteListActivity::class.java)
@@ -117,7 +114,7 @@ class NoteWriteActivity : AppCompatActivity() {
             task.addOnSuccessListener { firebaseVisionText: FirebaseVisionText ->
                 //Set recognized text from image in our TextView
                 val text = firebaseVisionText.text
-                contents_view!!.text = text
+                contents_view!!.setText(text)
         }
     }
     }
@@ -130,12 +127,7 @@ class NoteWriteActivity : AppCompatActivity() {
             ref.putFile(uri)
                 .addOnSuccessListener {
                     ref.downloadUrl.addOnSuccessListener {
-                        firestore?.collection("NoteTaking")?.document("${auth?.currentUser?.uid}_toeic_${cal.timeInMillis}")?.update("img_src",imgFileName)
-
-//                        firestore?.collection("User")?.document("Study")?.collection("NoteTaking")?.document("record_${auth?.currentUser?.uid}_${cal.timeInMillis}")?.update("img_src",imgFileName)
-
-//                        firestore?.collection("Records")?.document("record_${auth?.currentUser?.uid}_${cal.timeInMillis}")?.update("img_src",imgFileName)
-
+                        firestore?.collection("NoteTaking")?.document("Subjects")?.collection("Toeic")?.document("${auth?.currentUser?.uid}_toeic_${cal.timeInMillis}")?.update("img_src",imgFileName)
                     }
                 }
         }else{
@@ -143,11 +135,7 @@ class NoteWriteActivity : AppCompatActivity() {
                 //이미지 업로드
                 .addOnSuccessListener {
                     ref.downloadUrl.addOnSuccessListener {
-                        firestore?.collection("NoteTaking")?.document("${auth?.currentUser?.uid}_toeic_${cal.timeInMillis}")?.update("img_src",imgFileName)
-
-//                        firestore?.collection("Records")?.document("record_${auth?.currentUser?.uid}_${cal.timeInMillis}")?.update("img_src",imgFileName)
-//                        firestore?.collection("User")?.document("Study")?.collection("NoteTaking")?.document("record_${auth?.currentUser?.uid}_${cal.timeInMillis}")?.update("img_src",imgFileName)
-
+                        firestore?.collection("NoteTaking")?.document("Subjects")?.collection("Toeic")?.document("${auth?.currentUser?.uid}_toeic_${cal.timeInMillis}")?.update("img_src",imgFileName)
                     }
                 }
                 .addOnFailureListener{ //실패하면

@@ -38,11 +38,8 @@ class NoteViewActivity : AppCompatActivity() {
             finish()
         }
 
-//        firestore?.collection("Records")?.whereEqualTo("date",date?.toLong())
-//        firestore?.collection("NoteTaking : Toeic")?.document("${auth?.currentUser?.uid}_${cal.timeInMillis}")?.update("img_src",imgFileName)
 
-//        firestore?.collection("User")?.document("Study")?.collection("NoteTaking")?.whereEqualTo("date",date?.toLong())
-        firestore?.collection("NoteTaking")?.whereEqualTo("date",date?.toLong())
+        firestore?.collection("NoteTaking")?.document("Subjects")?.collection("Toeic")?.whereEqualTo("date",date?.toLong())
             ?.get()?.addOnSuccessListener { documents ->
                 for(doc in documents){
                     title_view.text = doc?.data?.get("title").toString()
@@ -67,11 +64,8 @@ class NoteViewActivity : AppCompatActivity() {
             mAlertDialog.setMessage("삭제된 노트 기록은 복구할 수 없으며 데이터베이스에서 완전히 삭제됩니다. " +
                     "정말 삭제하겠습니까?")
             mAlertDialog.setPositiveButton("Yes") { dialog, id ->
-                //perform some tasks here
 
-
-//                firestore?.collection("User")?.document("Study")?.collection("NoteTaking")?.document("record_${auth.currentUser?.uid}_${date}")
-                firestore?.collection("NoteTaking")?.document("${auth.currentUser?.uid}_toeic_${date}")
+                firestore?.collection("NoteTaking")?.document("Subjects")?.collection("Toeic")?.document("${auth.currentUser?.uid}_cs_${date}")
                     .delete()
                     .addOnSuccessListener {
                         Toast.makeText(this, "삭제되었습니다.",Toast.LENGTH_LONG).show()

@@ -38,12 +38,6 @@ class CsNoteViewActivity : AppCompatActivity() {
             finish()
         }
 
-//        firestore?.collection("Records")?.whereEqualTo("date",date?.toLong())
-//        firestore?.collection("NoteTaking : Toeic")?.document("${auth?.currentUser?.uid}_${cal.timeInMillis}")?.update("img_src",imgFileName)
-
-//        firestore?.collection("User")?.document("Study")?.collection("NoteTaking")?.whereEqualTo("date",date?.toLong())
-//        firestore?.collection("NoteTaking")?.document("Subjects")?.collection("CS")?.document("${auth?.currentUser?.uid}_cs_${cal.timeInMillis}")?.update("img_src",imgFileName)
-
         firestore?.collection("NoteTaking")?.document("Subjects")?.collection("CS")?.whereEqualTo("date",date?.toLong())
             ?.get()?.addOnSuccessListener { documents ->
                 for(doc in documents){
@@ -71,8 +65,6 @@ class CsNoteViewActivity : AppCompatActivity() {
             mAlertDialog.setPositiveButton("Yes") { dialog, id ->
                 //perform some tasks here
 
-
-//                firestore?.collection("User")?.document("Study")?.collection("NoteTaking")?.document("record_${auth.currentUser?.uid}_${date}")
                 firestore?.collection("NoteTaking")?.document("Subjects")?.collection("CS")?.document("${auth.currentUser?.uid}_cs_${date}")
                     .delete()
                     .addOnSuccessListener {

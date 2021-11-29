@@ -81,9 +81,6 @@ class CsNoteWriteActivity : AppCompatActivity() {
 
             firestore?.collection("NoteTaking")?.document("Subjects")?.collection("CS")?.document("${auth?.currentUser?.uid}_cs_${cal.timeInMillis}")?.set(noteModel)
 
-
-//            firestore?.collection("Records")?.document("record_${auth?.currentUser?.uid}_${cal.timeInMillis}")?.set(noteModel)
-
             uploadImageToFirebaseStorage()//사진 올리는 코드
             myStartActivity(CsNoteListActivity::class.java)
             finish()
