@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudyBNB">
         <activity
+            android:name=".SubjectActivity"
+            android:exported="false" />
+        <activity
             android:name=".InfoActivity"
             android:exported="true" />
         <activity
@@ -26,6 +29,9 @@
             android:exported="true" />
         <activity
             android:name=".MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".TimerActivity"
             android:exported="true" />
         <activity
             android:name=".SplashActivity"
