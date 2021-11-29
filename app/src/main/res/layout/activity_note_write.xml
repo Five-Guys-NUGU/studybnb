@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="나만의 노트"
+            android:text="TOEIC"
             android:textSize="30dp"
             android:layout_gravity="center"
             android:textColor="@color/black"
@@ -94,9 +94,9 @@
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
-            <TextView
+            <EditText
                 android:layout_width="300dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/contents_view"
                 android:layout_marginTop="10dp"
                 android:background="@color/white"
