@@ -16,7 +16,8 @@ class SubjectSelectActivity : AppCompatActivity() {
         }
 
         subHistory_btn.setOnClickListener {
-
+            myStartActivity(HistoryNoteListActivity::class.java)
+            finish()
             }
 
         subTOEIC_btn.setOnClickListener {
