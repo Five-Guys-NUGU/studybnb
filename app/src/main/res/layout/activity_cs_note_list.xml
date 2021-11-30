@@ -6,23 +6,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="@color/studyBNB_blue"
-    tools:context=".NoteListActivity">
+    android:background="@color/white"
+    tools:context=".CsNoteListActivity">
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/ivory">
+        android:background="@color/light_gray">
         <ImageView
             android:layout_width="60dp"
             android:padding="10dp"
             android:layout_height="60dp"
-            android:src="@drawable/back"
+            android:src="@drawable/back_button"
             android:id="@+id/back_btn"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="컴퓨터 활용 능력"
-            android:textColor="@color/dark_brown"
+            android:textColor="@color/black"
             android:textSize="30dp"
             android:layout_gravity="center"
             />
@@ -35,17 +35,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/diary_list"
-            android:layout_marginBottom="60dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_marginBottom="60dp"
+            android:overScrollMode="never"/>
+
+        <Button
             android:id="@+id/write_btn"
-            android:layout_gravity="bottom"
-            android:background="@color/ivory"
-            android:textColor="@color/dark_brown"
-            android:textSize="25dp"
+            android:layout_width="400dp"
+            android:layout_height="60dp"
+            android:layout_gravity="bottom|center"
+            android:background="@drawable/save_button"
             android:gravity="center"
-            android:text="글쓰기" />
+            android:text="글쓰기"
+            android:textColor="@color/white"
+            android:textSize="30dp" />
     </FrameLayout>
 
 </LinearLayout>
