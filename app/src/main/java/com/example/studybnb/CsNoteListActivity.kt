@@ -38,4 +38,12 @@ class CsNoteListActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    override fun onBackPressed() {
+        myStartActivity(SubjectSelectActivity::class.java)
+        finish()
+    }
+
+
+
+
 }

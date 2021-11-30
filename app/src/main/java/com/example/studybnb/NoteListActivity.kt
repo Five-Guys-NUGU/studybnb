@@ -37,4 +37,10 @@ class NoteListActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    override fun onBackPressed() {
+        startActivity(Intent(this, SubjectSelectActivity::class.java))
+        finish()
+    }
+
+
 }

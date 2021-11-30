@@ -65,7 +65,7 @@ class NoteViewActivity : AppCompatActivity() {
                     "정말 삭제하겠습니까?")
             mAlertDialog.setPositiveButton("Yes") { dialog, id ->
 
-                firestore?.collection("NoteTaking")?.document("Subjects")?.collection("Toeic")?.document("${auth.currentUser?.uid}_cs_${date}")
+                firestore?.collection("NoteTaking")?.document("Subjects")?.collection("Toeic")?.document("${auth.currentUser?.uid}_toeic_${date}")
                     .delete()
                     .addOnSuccessListener {
                         Toast.makeText(this, "삭제되었습니다.",Toast.LENGTH_LONG).show()
