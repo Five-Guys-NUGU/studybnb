@@ -22,6 +22,9 @@
             android:name=".NoteViewActivity"
             android:exported="true" />
         <activity
+            android:name=".SubjectActivity"
+            android:exported="false" />
+        <activity
             android:name=".InfoActivity"
             android:exported="true" />
         <activity
@@ -39,6 +42,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" />
+      
         <activity
             android:name=".CsNoteListActivity"
             android:exported="true" />
@@ -56,7 +60,12 @@
             android:exported="true" />
         <activity
             android:name=".HistoryNoteWriteActivity"
+                   android:exported="true" />
+      
+        <activity
+            android:name=".TimerActivity"
             android:exported="true" />
+      
         <activity
             android:name=".SplashActivity"
             android:exported="true">
