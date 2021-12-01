@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@color/studyBNB_blue"
+    tools:context=".SubjectSelectActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/ivory">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Subjects"
+            android:textSize="30dp"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            />
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:padding="10dp"
+            android:src="@drawable/back_button" />
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/subHistory_btn"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="180dp"
+        android:background="@drawable/select_button1"
+        android:text="한국사"
+        android:textColor="@color/black"
+        android:textSize="25dp" />
+
+
+    <Button
+        android:id="@+id/subTOEIC_btn"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/select_button1"
+        android:text="TOEIC"
+        android:textColor="@color/black"
+        android:textSize="25dp" />
+
+    <Button
+        android:id="@+id/subCS_btn"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/select_button1"
+        android:text="컴퓨터 활용 능력"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
+
+</LinearLayout>

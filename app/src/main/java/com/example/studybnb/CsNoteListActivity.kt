@@ -4,17 +4,18 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.studybnb.adapter.CsItemAdapter
 import com.example.studybnb.adapter.ItemAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_note_list.*
 
-class NoteListActivity : AppCompatActivity() {
+class CsNoteListActivity : AppCompatActivity() {
     private var firestore : FirebaseFirestore? = null
     private lateinit var auth : FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_note_list)
+        setContentView(R.layout.activity_cs_note_list)
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
 
@@ -22,13 +23,13 @@ class NoteListActivity : AppCompatActivity() {
             myStartActivity(SubjectSelectActivity::class.java)
         }
         write_btn.setOnClickListener {
-            myStartActivity(NoteWriteActivity::class.java)
+            myStartActivity(CsNoteWriteActivity::class.java)
         }
         val layoutManager = LinearLayoutManager(this)
         layoutManager.setReverseLayout(true)
         layoutManager.setStackFromEnd(true)
         diary_list.layoutManager = layoutManager
-        diary_list.adapter = ItemAdapter(this)
+        diary_list.adapter = CsItemAdapter(this)
     }
 
     private fun myStartActivity(c: Class<*>) {
@@ -38,9 +39,11 @@ class NoteListActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        startActivity(Intent(this, SubjectSelectActivity::class.java))
+        myStartActivity(SubjectSelectActivity::class.java)
         finish()
     }
+
+
 
 
 }

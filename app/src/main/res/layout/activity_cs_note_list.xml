@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:background="@color/white"
-    tools:context=".NoteListActivity">
+    tools:context=".CsNoteListActivity">
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TOEIC"
+            android:text="컴퓨터 활용 능력"
             android:textColor="@color/black"
             android:textSize="30dp"
             android:layout_gravity="center"
@@ -37,17 +37,17 @@
             android:id="@+id/diary_list"
             android:layout_marginBottom="60dp"
             android:overScrollMode="never"/>
-        <TextView
+
+        <Button
+            android:id="@+id/write_btn"
             android:layout_width="400dp"
             android:layout_height="60dp"
-            android:id="@+id/write_btn"
             android:layout_gravity="bottom|center"
             android:background="@drawable/save_button"
-            android:textColor="@color/white"
-            android:textSize="30dp"
             android:gravity="center"
-            android:text="글쓰기" />
-
+            android:text="글쓰기"
+            android:textColor="@color/white"
+            android:textSize="30dp" />
     </FrameLayout>
 
 </LinearLayout>

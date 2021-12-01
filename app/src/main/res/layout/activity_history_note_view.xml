@@ -7,7 +7,9 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:background="@color/white"
-    tools:context=".NoteWriteActivity">
+
+    tools:context=".HistoryNoteViewActivity">
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -18,14 +20,14 @@
             android:layout_height="60dp"
             android:src="@drawable/back_button"
             android:id="@+id/back_btn"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TOEIC"
-            android:textSize="30dp"
             android:layout_gravity="center"
+            android:text="한국사"
             android:textColor="@color/black"
-            />
+            android:textSize="30dp" />
     </FrameLayout>
 
     <ScrollView
@@ -42,11 +44,12 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/img_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="300dp"
+                android:layout_height="400dp"
+                android:id="@+id/img_view"
+                android:background="@color/light_gray"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/photo_default" />
+                />
 
             <TextView
                 android:layout_width="300dp"
@@ -56,15 +59,14 @@
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
-            <EditText
+            <TextView
                 android:layout_width="300dp"
                 android:layout_height="40dp"
                 android:id="@+id/title_view"
                 android:layout_marginTop="10dp"
                 android:background="@color/light_gray"
                 android:gravity="center"
-                android:hint="제목을 입력하세요"
-                android:textColor="@color/dark_brown"
+                android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <TextView
@@ -76,14 +78,13 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/cal_view"
+                android:id="@+id/date_view"
                 android:layout_width="300dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:background="@color/light_gray"
                 android:gravity="center"
-                android:text="클릭하여 날짜 넣기"
-                android:textColor="@color/dark_brown"
+                android:textColor="@color/black"
                 android:textSize="15sp" />
 
 
@@ -95,9 +96,9 @@
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
-            <EditText
+            <TextView
                 android:layout_width="300dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:id="@+id/contents_view"
                 android:layout_marginTop="10dp"
                 android:background="@color/light_gray"
@@ -112,14 +113,15 @@
         </LinearLayout>
 
     </ScrollView>
-    <TextView
+    <Button
         android:layout_width="400dp"
         android:layout_height="60dp"
-        android:id="@+id/write_save_btn"
-        android:text="저장"
+        android:id="@+id/delete_btn"
+        android:text="삭제"
         android:gravity="center"
         android:textSize="30dp"
-        android:background="@drawable/save_button"
-        android:textColor="@color/white"/>
+        android:background="@drawable/delete_button"
+        android:textColor="@color/light_red"/>
+
 
 </LinearLayout>

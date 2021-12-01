@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:background="@color/white"
-    tools:context=".NoteListActivity">
+    tools:context=".HistoryNoteListActivity">
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -18,14 +18,14 @@
             android:layout_height="60dp"
             android:src="@drawable/back_button"
             android:id="@+id/back_btn"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TOEIC"
-            android:textColor="@color/black"
-            android:textSize="30dp"
             android:layout_gravity="center"
-            />
+            android:text="한국사"
+            android:textColor="@color/black"
+            android:textSize="30dp" />
     </FrameLayout>
 
     <FrameLayout
@@ -47,7 +47,6 @@
             android:textSize="30dp"
             android:gravity="center"
             android:text="글쓰기" />
-
     </FrameLayout>
 
 </LinearLayout>

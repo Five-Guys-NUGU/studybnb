@@ -18,15 +18,18 @@ class MainActivity : AppCompatActivity() {
         }
 
         note_btn.setOnClickListener {
-            val intent = Intent(this, SubjectActivity::class.java).apply {
-                putExtra("isTimer", false)
-            }
-            startActivity(intent)
+          myStartActivity(SubjectSelectActivity::class.java)
         }
 
         setting_btn.setOnClickListener {
-            val intent = Intent(this, SettingActivity::class.java)
-            startActivity(intent)
+            myStartActivity(SettingActivity::class.java)
         }
     }
+
+    private fun myStartActivity(c: Class<*>) {
+        val intent = Intent(this, c)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) //액티비티가 여러게 쌓이는 것을 방지. 뒤로가기 누르면 앱 종료.
+        startActivity(intent)
+    }
+
 }
