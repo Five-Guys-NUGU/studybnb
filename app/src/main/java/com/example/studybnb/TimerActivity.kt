@@ -38,7 +38,6 @@ class TimerActivity : AppCompatActivity() {
     private var pauseOffset: Long = 0
     private var running = false
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_timer)
@@ -60,13 +59,18 @@ class TimerActivity : AppCompatActivity() {
         }
 
         finish_timer_btn.setOnClickListener {
-            studyTimerModel.UID = auth?.currentUser?.uid
-            studyTimerModel.study_time = (SystemClock.elapsedRealtime() - chronometer.base) / 1000
-            studyTimerModel.break_time = pauseOffset / 1000
-            studyTimerModel.date = LocalDate.now().toString()
+            //studyTimerModel.UID = auth?.currentUser?.uid
+            //studyTimerModel.study_time = (SystemClock.elapsedRealtime() - chronometer.base) / 1000
+            //studyTimerModel.break_time = pauseOffset / 1000
+            studyTimerModel.finish_time = System.currentTimeMillis()
 
             firestore?.collection("StudyTimer")?.
-            document("${studyTimerModel.date+"_"+auth?.currentUser?.uid}")?.set(studyTimerModel)
+            document("${auth?.currentUser?.uid+"_"+studyTimerModel.start_time}")?.
+            update(mapOf("finish_time" to studyTimerModel.finish_time))
+
+            firestore?.collection("User")?.
+            document("${auth?.currentUser?.uid}")?.
+            update(mapOf("is_studying" to 0))
 
             chronometer.base = SystemClock.elapsedRealtime()
             pauseOffset = 0
@@ -78,12 +82,23 @@ class TimerActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun startTimer(v: View) {
         if (!running) {
             chronometer.base = SystemClock.elapsedRealtime() - pauseOffset
             chronometer.start()
             running = true
             chronometer.setTextColor(Color.WHITE)
+
+            studyTimerModel.start_time = System.currentTimeMillis()
+            studyTimerModel.date = LocalDate.now().toString()
+
+            firestore?.collection("StudyTimer")?.
+            document("${auth?.currentUser?.uid+"_"+studyTimerModel.start_time}")?.set(studyTimerModel)
+
+            firestore?.collection("User")?.
+            document("${auth?.currentUser?.uid}")?.
+            update(mapOf("is_studying" to studyTimerModel.start_time))
         }
     }
 
