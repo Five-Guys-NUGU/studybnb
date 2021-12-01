@@ -42,22 +42,6 @@ class SubjectActivity : AppCompatActivity() {
                 }
                 startActivity(intent)
             }
-        } else {
-            subHistory_btn.setOnClickListener {
-                val intent = Intent(this, NoteListActivity::class.java)
-                startActivity(intent)
-            }
-
-            subTOEIC_btn.setOnClickListener {
-                val intent = Intent(this, NoteListActivity::class.java)
-                startActivity(intent)
-            }
-
-            subCS_btn.setOnClickListener {
-                val intent = Intent(this, NoteListActivity::class.java)
-                startActivity(intent)
-            }
         }
-
     }
 }
