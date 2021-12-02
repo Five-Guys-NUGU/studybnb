@@ -65,6 +65,11 @@ class TimerActivity : AppCompatActivity() {
         finish_timer_btn.setOnClickListener {
             showSettingPopup()
         }
+
+    }
+
+    override fun onBackPressed() {
+        showSettingPopup()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -87,14 +92,6 @@ class TimerActivity : AppCompatActivity() {
         }
     }
 
-    fun breakTimer(v: View) {
-        if (running) {
-            chronometer.stop()
-            pauseOffset = SystemClock.elapsedRealtime() - chronometer.base
-            running = false;
-            chronometer.setTextColor(Color.GRAY)
-        }
-    }
 
     private fun showSettingPopup() {
         val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
