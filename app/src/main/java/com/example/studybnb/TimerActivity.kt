@@ -6,30 +6,30 @@ package com.example.studybnb
  * https://www.youtube.com/watch?v=RLnb4vVkftc&ab_channel=CodinginFlow
  */
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.SystemClock
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.Chronometer
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.bumptech.glide.Glide
 import com.example.studybnb.databinding.ActivityTimerBinding
 import com.example.studybnb.model.StudyTimerModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_note_view.*
-import java.time.LocalDate
-import java.time.LocalDateTime
 import kotlinx.android.synthetic.main.activity_setting.back_btn
 import kotlinx.android.synthetic.main.activity_timer.*
-import java.text.SimpleDateFormat
+import kotlinx.android.synthetic.main.alert_popup.view.*
+import java.time.LocalDate
 
 class TimerActivity : AppCompatActivity() {
     // Firebase setup
@@ -41,108 +41,125 @@ class TimerActivity : AppCompatActivity() {
     private lateinit var chronometer: Chronometer
     private var pauseOffset: Long = 0
     private var running = false
-    var date : String? = null
-    var studyTime : Long?=null
+    private lateinit var date : String
+    private var studyTime : Long = 0
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        this.setContentView(R.layout.activity_timer)
-        this.auth = FirebaseAuth.getInstance()
-        this.date =LocalDate.now().toString()
-        Log.e(this.date, "dateToday")
+        setContentView(R.layout.activity_timer)
+        auth = FirebaseAuth.getInstance()
 
-
-        this.firestore?.collection("StudyTimer")?.document("Subjects")
-            ?.collection("Toeic")?.whereEqualTo("date", this.date)
-            ?.get()?.addOnSuccessListener { documents ->
-                for(doc in documents){
-//                    studyTime!! += doc?.data?.get("study_time").toString().toLong()
-                    Log.e(studyTime.toString(), "studyTime")
-                }
-            }
-
-        this.study_time.text = this.studyTime.toString()
+        date= LocalDate.now().toString()
+        var totalStudyTime : Long = 0
 
         // Receive value of subject and display it in the screen
-        val extraSubject = this.intent?.extras?.getString("subject").toString()
-        this.studyTimerModel.subject = extraSubject
+        val extraSubject = intent?.extras?.getString("subject").toString()
+        studyTimerModel.subject = extraSubject
         val binding: ActivityTimerBinding = DataBindingUtil.setContentView(
             this, R.layout.activity_timer)
-        binding.studyTimerModel = this.studyTimerModel
-
+        binding.studyTimerModel = studyTimerModel
 
         // Setup the timer
-        this.chronometer = this.findViewById(R.id.chronometer)
-        this.chronometer.format
+        chronometer = findViewById(R.id.chronometer)
+        chronometer.format
 
-
-        this.back_btn.setOnClickListener {
-            this.finish()
+        back_btn.setOnClickListener {
+            showSettingPopup()
         }
 
-        this.finish_timer_btn.setOnClickListener {
-            //studyTimerModel.UID = auth?.currentUser?.uid
-            this.studyTimerModel.study_time = (SystemClock.elapsedRealtime() - this.chronometer.base) / 1000
-            //studyTimerModel.break_time = pauseOffset / 1000
-            this.studyTimerModel.finish_time = System.currentTimeMillis()
-
-
-//            firestore?.collection("StudyTimer")?.
-//            document("${auth?.currentUser?.uid+"_"+studyTimerModel.start_time}")?.
-            this.firestore?.collection("StudyTimer")?.document("Subjects")?.collection("Toeic")?.
-            document("${this.auth?.currentUser?.uid+"_"+ this.studyTimerModel.start_time}")?.
-            update(mapOf("finish_time" to this.studyTimerModel.finish_time))
-
-            this.firestore?.collection("StudyTimer")?.document("Subjects")?.collection("Toeic")?.
-            document("${this.auth?.currentUser?.uid+"_"+ this.studyTimerModel.start_time}")?.
-            update(mapOf("study_time" to this.studyTimerModel.study_time))
-
-            this.firestore?.collection("User")?.
-            document("${this.auth?.currentUser?.uid}")?.
-            update(mapOf("is_studying" to 0))
-
-            this.chronometer.base = SystemClock.elapsedRealtime()
-            this.pauseOffset = 0
-
-            Toast.makeText(this, "Studying time has been saved.", Toast.LENGTH_SHORT).show()
-            var intent = Intent(this, MainActivity::class.java)
-            this.startActivity(intent)
-            this.finish()
+        finish_timer_btn.setOnClickListener {
+            showSettingPopup()
         }
+
+
+
+        firestore?.collection("StudyTimer")?.whereEqualTo("date",date)
+            ?.whereEqualTo("subject","Toeic")
+            ?.get()?.addOnSuccessListener { documents ->
+                for(doc in documents){
+                    studyTime = doc?.data?.get("study_time").toString().toLong()
+                    totalStudyTime+=studyTime
+
+                }
+                Log.e(totalStudyTime.toString(), "studyTime", )
+                var hours = totalStudyTime / 3600;
+                var minutes = (totalStudyTime % 3600) / 60;
+                var seconds = totalStudyTime % 60;
+
+                var timeString = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+                total_study_time.text=timeString
+            }
+//        Log.e(totalStudyTime.toString(), "studyTime", )
+
+
+
+    }
+
+    override fun onBackPressed() {
+        showSettingPopup()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun startTimer(v: View) {
-        if (!this.running) {
-            this.chronometer.base = SystemClock.elapsedRealtime() - this.pauseOffset
-            this.chronometer.start()
-            this.running = true
-            this.chronometer.setTextColor(Color.WHITE)
+        if (!running) {
+            chronometer.base = SystemClock.elapsedRealtime() - pauseOffset
+            chronometer.start()
+            running = true
+            chronometer.setTextColor(Color.WHITE)
 
-            this.studyTimerModel.start_time = System.currentTimeMillis()
-            this.studyTimerModel.date = LocalDate.now().toString()
+            studyTimerModel.start_time = System.currentTimeMillis()
+            studyTimerModel.date = LocalDate.now().toString()
 
-            this.firestore?.collection("StudyTimer")?.document("Subjects")?.collection("Toeic")?.
-            document("${this.auth?.currentUser?.uid+"_"+ this.studyTimerModel.start_time}")?.set(
-                this.studyTimerModel
-            )
+            firestore?.collection("StudyTimer")?.
+            document("${auth?.currentUser?.uid+"_"+studyTimerModel.start_time}")?.set(studyTimerModel)
 
-//            firestore?.collection("StudyTimer")?.
-//            document("${auth?.currentUser?.uid+"_"+studyTimerModel.start_time}")?.set(studyTimerModel)
-
-            this.firestore?.collection("User")?.
-            document("${this.auth?.currentUser?.uid}")?.
-            update(mapOf("is_studying" to this.studyTimerModel.start_time))
+            firestore?.collection("User")?.
+            document("${auth?.currentUser?.uid}")?.
+            update(mapOf("is_studying" to studyTimerModel.start_time))
         }
     }
 
-    fun breakTimer(v: View) {
-        if (this.running) {
-            this.chronometer.stop()
-            this.pauseOffset = SystemClock.elapsedRealtime() - this.chronometer.base
-            this.running = false;
-            this.chronometer.setTextColor(Color.GRAY)
-        }
+
+    private fun showSettingPopup() {
+        val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val view = inflater.inflate(R.layout.alert_popup, null)
+        val textView: TextView = view.findViewById(R.id.textView)
+        textView.text = "정말 공부를 종료하시겠습니까?"
+
+        val alertDialog = AlertDialog.Builder(this)
+            .setTitle("잠깐!")
+            .setPositiveButton("예") { dialog, which ->
+                //studyTimerModel.UID = auth?.currentUser?.uid
+                studyTimerModel.study_time = (SystemClock.elapsedRealtime() - chronometer.base) / 1000
+                //studyTimerModel.break_time = pauseOffset / 1000
+                studyTimerModel.finish_time = System.currentTimeMillis()
+
+                firestore?.collection("StudyTimer")?.
+                document("${auth?.currentUser?.uid+"_"+studyTimerModel.start_time}")?.
+                update(mapOf("finish_time" to studyTimerModel.finish_time))
+
+                firestore?.collection("StudyTimer")?.
+                document("${auth?.currentUser?.uid+"_"+studyTimerModel.start_time}")?.
+                update(mapOf("study_time" to studyTimerModel.study_time))
+
+
+                firestore?.collection("User")?.
+                document("${auth?.currentUser?.uid}")?.
+                update(mapOf("is_studying" to 0))
+
+                chronometer.base = SystemClock.elapsedRealtime()
+                pauseOffset = 0
+
+                var intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+            .setNeutralButton("아니오", null)
+            .create()
+
+        alertDialog.setView(view)
+        alertDialog.show()
     }
+
 }

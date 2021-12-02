@@ -21,6 +21,8 @@ class SubjectActivity : AppCompatActivity() {
             finish()
         }
 
+
+
         if ( isTimer == true ) {
             subHistory_btn.setOnClickListener {
                 val intent = Intent(this, TimerActivity::class.java).apply {
@@ -31,7 +33,7 @@ class SubjectActivity : AppCompatActivity() {
 
             subTOEIC_btn.setOnClickListener {
                 val intent = Intent(this, TimerActivity::class.java).apply {
-                    putExtra("subject", "TOEIC")
+                    putExtra("subject", "Toeic")
                 }
                 startActivity(intent)
             }
