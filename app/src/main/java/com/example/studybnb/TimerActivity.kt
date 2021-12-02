@@ -10,26 +10,26 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.SystemClock
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Chronometer
-import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.studybnb.databinding.ActivityTimerBinding
 import com.example.studybnb.model.StudyTimerModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import java.time.LocalDate
-import java.time.LocalDateTime
+import kotlinx.android.synthetic.main.activity_note_view.*
 import kotlinx.android.synthetic.main.activity_setting.back_btn
 import kotlinx.android.synthetic.main.activity_timer.*
+import kotlinx.android.synthetic.main.alert_popup.view.*
+import java.time.LocalDate
 
 class TimerActivity : AppCompatActivity() {
     // Firebase setup
@@ -41,11 +41,17 @@ class TimerActivity : AppCompatActivity() {
     private lateinit var chronometer: Chronometer
     private var pauseOffset: Long = 0
     private var running = false
+    private lateinit var date : String
+    private var studyTime : Long = 0
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_timer)
         auth = FirebaseAuth.getInstance()
+
+        date= LocalDate.now().toString()
+        var totalStudyTime : Long = 0
 
         // Receive value of subject and display it in the screen
         val extraSubject = intent?.extras?.getString("subject").toString()
@@ -65,6 +71,28 @@ class TimerActivity : AppCompatActivity() {
         finish_timer_btn.setOnClickListener {
             showSettingPopup()
         }
+
+
+
+        firestore?.collection("StudyTimer")?.whereEqualTo("date",date)
+            ?.whereEqualTo("subject","Toeic")
+            ?.get()?.addOnSuccessListener { documents ->
+                for(doc in documents){
+                    studyTime = doc?.data?.get("study_time").toString().toLong()
+                    totalStudyTime+=studyTime
+
+                }
+                Log.e(totalStudyTime.toString(), "studyTime", )
+                var hours = totalStudyTime / 3600;
+                var minutes = (totalStudyTime % 3600) / 60;
+                var seconds = totalStudyTime % 60;
+
+                var timeString = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+                total_study_time.text=timeString
+            }
+//        Log.e(totalStudyTime.toString(), "studyTime", )
+
+
 
     }
 
@@ -133,4 +161,5 @@ class TimerActivity : AppCompatActivity() {
         alertDialog.setView(view)
         alertDialog.show()
     }
+
 }

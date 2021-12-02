@@ -44,6 +44,14 @@
             android:textColor="@color/ivory"
             android:textSize="30sp" />
 
+        <TextView
+            android:id="@+id/total_study_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/ivory"
+            android:textSize="30sp" />
+
         <Chronometer
             android:id="@+id/chronometer"
             android:layout_width="wrap_content"
