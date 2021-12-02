@@ -6,17 +6,21 @@ package com.example.studybnb
  * https://www.youtube.com/watch?v=RLnb4vVkftc&ab_channel=CodinginFlow
  */
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.SystemClock
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.Chronometer
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import com.example.studybnb.databinding.ActivityTimerBinding
 import com.example.studybnb.model.StudyTimerModel
@@ -55,30 +59,11 @@ class TimerActivity : AppCompatActivity() {
         chronometer.format
 
         back_btn.setOnClickListener {
-            finish()
+            showSettingPopup()
         }
 
         finish_timer_btn.setOnClickListener {
-            //studyTimerModel.UID = auth?.currentUser?.uid
-            //studyTimerModel.study_time = (SystemClock.elapsedRealtime() - chronometer.base) / 1000
-            //studyTimerModel.break_time = pauseOffset / 1000
-            studyTimerModel.finish_time = System.currentTimeMillis()
-
-            firestore?.collection("StudyTimer")?.
-            document("${auth?.currentUser?.uid+"_"+studyTimerModel.start_time}")?.
-            update(mapOf("finish_time" to studyTimerModel.finish_time))
-
-            firestore?.collection("User")?.
-            document("${auth?.currentUser?.uid}")?.
-            update(mapOf("is_studying" to 0))
-
-            chronometer.base = SystemClock.elapsedRealtime()
-            pauseOffset = 0
-
-            Toast.makeText(this, "Studying time has been saved.", Toast.LENGTH_SHORT).show()
-            var intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+            showSettingPopup()
         }
     }
 
@@ -109,5 +94,46 @@ class TimerActivity : AppCompatActivity() {
             running = false;
             chronometer.setTextColor(Color.GRAY)
         }
+    }
+
+    private fun showSettingPopup() {
+        val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val view = inflater.inflate(R.layout.alert_popup, null)
+        val textView: TextView = view.findViewById(R.id.textView)
+        textView.text = "정말 공부를 종료하시겠습니까?"
+
+        val alertDialog = AlertDialog.Builder(this)
+            .setTitle("잠깐!")
+            .setPositiveButton("예") { dialog, which ->
+                //studyTimerModel.UID = auth?.currentUser?.uid
+                studyTimerModel.study_time = (SystemClock.elapsedRealtime() - chronometer.base) / 1000
+                //studyTimerModel.break_time = pauseOffset / 1000
+                studyTimerModel.finish_time = System.currentTimeMillis()
+
+                firestore?.collection("StudyTimer")?.
+                document("${auth?.currentUser?.uid+"_"+studyTimerModel.start_time}")?.
+                update(mapOf("finish_time" to studyTimerModel.finish_time))
+
+                firestore?.collection("StudyTimer")?.
+                document("${auth?.currentUser?.uid+"_"+studyTimerModel.start_time}")?.
+                update(mapOf("study_time" to studyTimerModel.study_time))
+
+
+                firestore?.collection("User")?.
+                document("${auth?.currentUser?.uid}")?.
+                update(mapOf("is_studying" to 0))
+
+                chronometer.base = SystemClock.elapsedRealtime()
+                pauseOffset = 0
+
+                var intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+            .setNeutralButton("아니오", null)
+            .create()
+
+        alertDialog.setView(view)
+        alertDialog.show()
     }
 }
