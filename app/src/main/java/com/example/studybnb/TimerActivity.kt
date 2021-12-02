@@ -30,6 +30,7 @@ import kotlinx.android.synthetic.main.activity_setting.back_btn
 import kotlinx.android.synthetic.main.activity_timer.*
 import kotlinx.android.synthetic.main.alert_popup.view.*
 import java.time.LocalDate
+import kotlin.reflect.typeOf
 
 class TimerActivity : AppCompatActivity() {
     // Firebase setup
@@ -42,7 +43,6 @@ class TimerActivity : AppCompatActivity() {
     private var pauseOffset: Long = 0
     private var running = false
     private lateinit var date : String
-    private var studyTime : Long = 0
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,7 +52,7 @@ class TimerActivity : AppCompatActivity() {
 
         date= LocalDate.now().toString()
         var totalStudyTime : Long = 0
-
+        var studyTime : Long
         // Receive value of subject and display it in the screen
         val extraSubject = intent?.extras?.getString("subject").toString()
         studyTimerModel.subject = extraSubject
@@ -78,8 +78,11 @@ class TimerActivity : AppCompatActivity() {
             ?.whereEqualTo("subject","Toeic")
             ?.get()?.addOnSuccessListener { documents ->
                 for(doc in documents){
-                    studyTime = doc?.data?.get("study_time").toString().toLong()
-                    totalStudyTime+=studyTime
+                    if(doc?.data?.get("study_time")!=null)//널 값이면 제외
+                    {
+                        studyTime = doc?.data?.get("study_time").toString().toLong()
+                        totalStudyTime+=studyTime
+                    }
 
                 }
                 Log.e(totalStudyTime.toString(), "studyTime", )
