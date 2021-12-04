@@ -71,6 +71,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".CsTimerActivity"
+            android:exported="true" />
+        <activity
+            android:name=".HistoryTimerActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

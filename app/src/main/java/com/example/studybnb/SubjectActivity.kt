@@ -25,25 +25,22 @@ class SubjectActivity : AppCompatActivity() {
 
         if ( isTimer == true ) {
             subHistory_btn.setOnClickListener {
-                val intent = Intent(this, TimerActivity::class.java).apply {
-                    putExtra("subject", "History")
-                }
-                startActivity(intent)
+                myStartActivity(HistoryTimerActivity::class.java)
             }
 
             subTOEIC_btn.setOnClickListener {
-                val intent = Intent(this, TimerActivity::class.java).apply {
-                    putExtra("subject", "Toeic")
-                }
-                startActivity(intent)
+                myStartActivity(TimerActivity::class.java)
             }
 
             subCS_btn.setOnClickListener {
-                val intent = Intent(this, TimerActivity::class.java).apply {
-                    putExtra("subject", "CS")
-                }
-                startActivity(intent)
+                myStartActivity(CsTimerActivity::class.java)
             }
         }
+    }
+
+    private fun myStartActivity(c: Class<*>) {
+        val intent = Intent(this, c)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) //액티비티가 여러게 쌓이는 것을 방지. 뒤로가기 누르면 앱 종료.
+        startActivity(intent)
     }
 }

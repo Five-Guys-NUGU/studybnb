@@ -12,7 +12,7 @@
         android:background="@color/studyBNB_blue"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        tools:context=".TimerActivity">
+        tools:context=".HistoryTimerActivity">
 
 
         <FrameLayout
@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="TOEIC"
+                android:text="한국사"
                 android:textColor="@color/dark_brown"
                 android:textSize="30dp" />
 
