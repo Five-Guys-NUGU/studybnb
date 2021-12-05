@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable name="studyTimerModel" type="com.example.studybnb.model.StudyTimerModel" />
     </data>
 
     <LinearLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        tools:context=".TimerActivity">
+        tools:context=".CsTimerActivity">
 
 
         <FrameLayout
@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="TOEIC"
+                android:text="컴퓨터 활용 능력"
                 android:textColor="@color/black"
                 android:textSize="30dp" />
 
@@ -35,6 +35,7 @@
                 android:padding="10dp"
                 android:src="@drawable/back_button" />
         </FrameLayout>
+
 
         <Chronometer
             android:id="@+id/chronometer"

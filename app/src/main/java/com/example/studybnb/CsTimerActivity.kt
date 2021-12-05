@@ -32,7 +32,7 @@ import kotlinx.android.synthetic.main.alert_popup.view.*
 import java.time.LocalDate
 import kotlin.reflect.typeOf
 
-class TimerActivity : AppCompatActivity() {
+class CsTimerActivity : AppCompatActivity() {
     // Firebase setup
     private lateinit var auth: FirebaseAuth
     var firestore :FirebaseFirestore = FirebaseFirestore.getInstance()
@@ -47,17 +47,15 @@ class TimerActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_timer)
+        setContentView(R.layout.cs_activity_timer)
         auth = FirebaseAuth.getInstance()
 
         date= LocalDate.now().toString()
         var totalStudyTime : Long = 0
         var studyTime : Long
+        // Receive value of subject and display it in the screen
+        studyTimerModel.subject = "CS"
 
-        studyTimerModel.subject = "Toeic"
-        val binding: ActivityTimerBinding = DataBindingUtil.setContentView(
-            this, R.layout.activity_timer)
-        binding.studyTimerModel = studyTimerModel
 
         // Setup the timer
         chronometer = findViewById(R.id.chronometer)
@@ -70,6 +68,8 @@ class TimerActivity : AppCompatActivity() {
         finish_timer_btn.setOnClickListener {
             showSettingPopup()
         }
+
+
     }
 
     override fun onBackPressed() {
