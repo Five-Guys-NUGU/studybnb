@@ -70,29 +70,6 @@ class TimerActivity : AppCompatActivity() {
         finish_timer_btn.setOnClickListener {
             showSettingPopup()
         }
-
-
-
-        firestore?.collection("StudyTimer")
-            ?.whereEqualTo("subject","Toeic")
-            ?.whereEqualTo("date",date)
-            ?.get()?.addOnSuccessListener { documents ->
-                for(doc in documents){
-                    if(doc?.data?.get("study_time")!=null)//널 값이면 제외
-                    {
-                        studyTime = doc?.data?.get("study_time").toString().toLong()
-                        totalStudyTime+=studyTime
-                    }
-
-                }
-                Log.e(totalStudyTime.toString(), "studyTime", )
-                var hours = totalStudyTime / 3600;
-                var minutes = (totalStudyTime % 3600) / 60;
-                var seconds = totalStudyTime % 60;
-
-                var timeString = String.format("%02d:%02d:%02d", hours, minutes, seconds);
-                total_study_time.text=timeString
-            }
     }
 
     override fun onBackPressed() {
@@ -105,7 +82,7 @@ class TimerActivity : AppCompatActivity() {
             chronometer.base = SystemClock.elapsedRealtime() - pauseOffset
             chronometer.start()
             running = true
-            chronometer.setTextColor(Color.WHITE)
+            chronometer.setTextColor(Color.DKGRAY)
 
             studyTimerModel.start_time = System.currentTimeMillis()
             studyTimerModel.date = LocalDate.now().toString()
@@ -150,7 +127,7 @@ class TimerActivity : AppCompatActivity() {
                 chronometer.base = SystemClock.elapsedRealtime()
                 pauseOffset = 0
 
-                var intent = Intent(this, MainActivity::class.java)
+                var intent = Intent(this, SubjectActivity::class.java)
                 startActivity(intent)
                 finish()
             }

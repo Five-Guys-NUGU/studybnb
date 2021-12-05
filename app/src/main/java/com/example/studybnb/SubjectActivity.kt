@@ -30,6 +30,8 @@ class SubjectActivity : AppCompatActivity() {
         var studyTime: Long
         date = LocalDate.now().toString()
 
+        today_date.text=date
+
         firestore?.collection("StudyTimer")
             ?.whereEqualTo("date", date)
             ?.get()?.addOnSuccessListener { documents ->
@@ -114,7 +116,7 @@ class SubjectActivity : AppCompatActivity() {
             }
 
         back_btn.setOnClickListener {
-            finish()
+            myStartActivity(MainActivity::class.java)
         }
 
         subHistory_btn.setOnClickListener {
@@ -128,8 +130,12 @@ class SubjectActivity : AppCompatActivity() {
         subCS_btn.setOnClickListener {
             myStartActivity(CsTimerActivity::class.java)
         }
-    }
 
+    }
+    override fun onBackPressed() {
+        myStartActivity(MainActivity::class.java)
+        finish()
+    }
 
     private fun myStartActivity(c: Class<*>) {
         val intent = Intent(this, c)
