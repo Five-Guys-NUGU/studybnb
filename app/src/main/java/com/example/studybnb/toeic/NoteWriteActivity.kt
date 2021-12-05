@@ -1,4 +1,4 @@
-package com.example.studybnb
+package com.example.studybnb.toeic
 
 import android.app.Activity
 import android.app.DatePickerDialog
@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.DatePicker
+import com.example.studybnb.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ml.vision.FirebaseVision
@@ -22,7 +23,7 @@ import java.util.*
 import com.example.studybnb.model.NoteModel
 
 
-class CsNoteWriteActivity : AppCompatActivity() {
+class NoteWriteActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     var firestore : FirebaseFirestore = FirebaseFirestore.getInstance()
@@ -34,7 +35,7 @@ class CsNoteWriteActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cs_note_write)
+        setContentView(R.layout.activity_note_write)
         auth = FirebaseAuth.getInstance()
         storage = FirebaseStorage.getInstance()
         val dateSetListener = object : DatePickerDialog.OnDateSetListener {
@@ -48,7 +49,7 @@ class CsNoteWriteActivity : AppCompatActivity() {
         }
 
         back_btn.setOnClickListener {
-            myStartActivity(CsNoteListActivity::class.java)
+            myStartActivity(NoteListActivity::class.java)
         }
 
         img_btn.setOnClickListener {
@@ -79,10 +80,10 @@ class CsNoteWriteActivity : AppCompatActivity() {
             noteModel.title = title_view.text.toString()
             noteModel.contents=contents_view.text.toString()
 
-            firestore?.collection("NoteTaking")?.document("Subjects")?.collection("CS")?.document("${auth?.currentUser?.uid}_cs_${cal.timeInMillis}")?.set(noteModel)
+            firestore?.collection("NoteTaking")?.document("Subjects")?.collection("Toeic")?.document("${auth?.currentUser?.uid}_toeic_${cal.timeInMillis}")?.set(noteModel)
 
             uploadImageToFirebaseStorage()//사진 올리는 코드
-            myStartActivity(CsNoteListActivity::class.java)
+            myStartActivity(NoteListActivity::class.java)
             finish()
         }
     }
@@ -103,6 +104,19 @@ class CsNoteWriteActivity : AppCompatActivity() {
                 img_btn.setImageBitmap(icon)
             }
 
+            //Create a FirebaseVisionImage object from your image/bitmap.
+            val firebaseVisionImage = FirebaseVisionImage.fromBitmap(bitmap!!)
+            val firebaseVision = FirebaseVision.getInstance()
+            val firebaseVisionTextRecognizer = firebaseVision.onDeviceTextRecognizer
+
+            //Process the Image
+            val task = firebaseVisionTextRecognizer.processImage(firebaseVisionImage)
+
+            task.addOnSuccessListener { firebaseVisionText: FirebaseVisionText ->
+                //Set recognized text from image in our TextView
+                val text = firebaseVisionText.text
+                contents_view!!.setText(text)
+        }
     }
     }
     private fun uploadImageToFirebaseStorage() {
@@ -114,9 +128,7 @@ class CsNoteWriteActivity : AppCompatActivity() {
             ref.putFile(uri)
                 .addOnSuccessListener {
                     ref.downloadUrl.addOnSuccessListener {
-                        firestore?.collection("NoteTaking")?.document("Subjects")?.collection("CS")?.document("${auth?.currentUser?.uid}_cs_${cal.timeInMillis}")?.update("img_src",imgFileName)
-
-
+                        firestore?.collection("NoteTaking")?.document("Subjects")?.collection("Toeic")?.document("${auth?.currentUser?.uid}_toeic_${cal.timeInMillis}")?.update("img_src",imgFileName)
                     }
                 }
         }else{
@@ -124,10 +136,7 @@ class CsNoteWriteActivity : AppCompatActivity() {
                 //이미지 업로드
                 .addOnSuccessListener {
                     ref.downloadUrl.addOnSuccessListener {
-
-                        firestore?.collection("NoteTaking")?.document("Subjects")?.collection("CS")?.document("${auth?.currentUser?.uid}_cs_${cal.timeInMillis}")?.update("img_src",imgFileName)
-
-
+                        firestore?.collection("NoteTaking")?.document("Subjects")?.collection("Toeic")?.document("${auth?.currentUser?.uid}_toeic_${cal.timeInMillis}")?.update("img_src",imgFileName)
                     }
                 }
                 .addOnFailureListener{ //실패하면

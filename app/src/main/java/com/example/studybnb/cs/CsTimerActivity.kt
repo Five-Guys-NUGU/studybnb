@@ -1,4 +1,4 @@
-package com.example.studybnb
+package com.example.studybnb.cs
 
 /**
  * @author Michael Sklors
@@ -12,7 +12,6 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Chronometer
@@ -20,19 +19,16 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import com.example.studybnb.databinding.ActivityTimerBinding
+import com.example.studybnb.R
+import com.example.studybnb.SubjectActivity
 import com.example.studybnb.model.StudyTimerModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_note_view.*
 import kotlinx.android.synthetic.main.activity_setting.back_btn
 import kotlinx.android.synthetic.main.activity_timer.*
-import kotlinx.android.synthetic.main.alert_popup.view.*
 import java.time.LocalDate
-import kotlin.reflect.typeOf
 
-class TimerActivity : AppCompatActivity() {
+class CsTimerActivity : AppCompatActivity() {
     // Firebase setup
     private lateinit var auth: FirebaseAuth
     var firestore :FirebaseFirestore = FirebaseFirestore.getInstance()
@@ -47,17 +43,15 @@ class TimerActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_timer)
+        setContentView(R.layout.cs_activity_timer)
         auth = FirebaseAuth.getInstance()
 
         date= LocalDate.now().toString()
         var totalStudyTime : Long = 0
         var studyTime : Long
+        // Receive value of subject and display it in the screen
+        studyTimerModel.subject = "CS"
 
-        studyTimerModel.subject = "Toeic"
-        val binding: ActivityTimerBinding = DataBindingUtil.setContentView(
-            this, R.layout.activity_timer)
-        binding.studyTimerModel = studyTimerModel
 
         // Setup the timer
         chronometer = findViewById(R.id.chronometer)
@@ -70,6 +64,8 @@ class TimerActivity : AppCompatActivity() {
         finish_timer_btn.setOnClickListener {
             showSettingPopup()
         }
+
+
     }
 
     override fun onBackPressed() {

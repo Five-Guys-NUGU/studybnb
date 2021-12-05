@@ -1,4 +1,4 @@
-package com.example.studybnb
+package com.example.studybnb.history
 
 import android.app.Activity
 import android.app.DatePickerDialog
@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.DatePicker
+import com.example.studybnb.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage

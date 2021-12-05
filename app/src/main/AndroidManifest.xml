@@ -19,7 +19,7 @@
             android:value="ocr" />
 
         <activity
-            android:name=".NoteViewActivity"
+            android:name=".toeic.NoteViewActivity"
             android:exported="true" />
         <activity
             android:name=".SubjectActivity"
@@ -28,10 +28,10 @@
             android:name=".InfoActivity"
             android:exported="true" />
         <activity
-            android:name=".NoteListActivity"
+            android:name=".toeic.NoteListActivity"
             android:exported="true" />
         <activity
-            android:name=".NoteWriteActivity"
+            android:name=".toeic.NoteWriteActivity"
             android:exported="true" />
         <activity
             android:name=".SettingActivity"
@@ -43,25 +43,25 @@
             android:name=".MainActivity"
             android:exported="true" />
         <activity
-            android:name=".CsNoteListActivity"
+            android:name=".cs.CsNoteListActivity"
             android:exported="true" />
         <activity
-            android:name=".CsNoteWriteActivity"
+            android:name=".cs.CsNoteWriteActivity"
             android:exported="true" />
         <activity
-            android:name=".CsNoteViewActivity"
+            android:name=".cs.CsNoteViewActivity"
             android:exported="true" />
         <activity
-            android:name=".HistoryNoteViewActivity"
+            android:name=".history.HistoryNoteViewActivity"
             android:exported="true" />
         <activity
-            android:name=".HistoryNoteListActivity"
+            android:name=".history.HistoryNoteListActivity"
             android:exported="true" />
         <activity
-            android:name=".HistoryNoteWriteActivity"
+            android:name=".history.HistoryNoteWriteActivity"
             android:exported="true" />
         <activity
-            android:name=".TimerActivity"
+            android:name=".toeic.TimerActivity"
             android:exported="true" />
         <activity
             android:name=".SplashActivity"
@@ -72,10 +72,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CsTimerActivity"
+            android:name=".cs.CsTimerActivity"
             android:exported="true" />
         <activity
-            android:name=".HistoryTimerActivity"
+            android:name=".history.HistoryTimerActivity"
             android:exported="true" />
     </application>
 

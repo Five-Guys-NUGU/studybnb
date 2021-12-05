@@ -1,21 +1,22 @@
-package com.example.studybnb
+package com.example.studybnb.toeic
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.studybnb.adapter.CsItemAdapter
+import com.example.studybnb.R
+import com.example.studybnb.SubjectSelectActivity
 import com.example.studybnb.adapter.ItemAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_note_list.*
 
-class CsNoteListActivity : AppCompatActivity() {
+class NoteListActivity : AppCompatActivity() {
     private var firestore : FirebaseFirestore? = null
     private lateinit var auth : FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cs_note_list)
+        setContentView(R.layout.activity_note_list)
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
 
@@ -23,13 +24,13 @@ class CsNoteListActivity : AppCompatActivity() {
             myStartActivity(SubjectSelectActivity::class.java)
         }
         write_btn.setOnClickListener {
-            myStartActivity(CsNoteWriteActivity::class.java)
+            myStartActivity(NoteWriteActivity::class.java)
         }
         val layoutManager = LinearLayoutManager(this)
         layoutManager.setReverseLayout(true)
         layoutManager.setStackFromEnd(true)
         diary_list.layoutManager = layoutManager
-        diary_list.adapter = CsItemAdapter(this)
+        diary_list.adapter = ItemAdapter(this)
     }
 
     private fun myStartActivity(c: Class<*>) {
@@ -39,11 +40,9 @@ class CsNoteListActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        myStartActivity(SubjectSelectActivity::class.java)
+        startActivity(Intent(this, SubjectSelectActivity::class.java))
         finish()
     }
-
-
 
 
 }

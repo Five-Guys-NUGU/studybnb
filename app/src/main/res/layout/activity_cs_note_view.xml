@@ -8,7 +8,7 @@
     android:gravity="center_horizontal"
     android:background="@color/white"
 
-    tools:context=".CsNoteViewActivity">
+    tools:context=".cs.CsNoteViewActivity">
 
     <FrameLayout
         android:layout_width="match_parent"

@@ -6,11 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.annotation.RequiresApi
+import com.example.studybnb.cs.CsTimerActivity
+import com.example.studybnb.history.HistoryTimerActivity
+import com.example.studybnb.toeic.TimerActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_subject.*
 import kotlinx.android.synthetic.main.activity_subject.back_btn
-import kotlinx.android.synthetic.main.activity_timer.*
 import java.time.LocalDate
 
 class SubjectActivity : AppCompatActivity() {
