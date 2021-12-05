@@ -6,8 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.studybnb.CsNoteViewActivity
-import com.example.studybnb.NoteViewActivity
+import com.example.studybnb.cs.CsNoteViewActivity
 import com.example.studybnb.R
 import com.example.studybnb.item.item
 import com.google.firebase.auth.FirebaseAuth

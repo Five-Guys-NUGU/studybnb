@@ -12,7 +12,7 @@
         android:background="@color/white"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        tools:context=".CsTimerActivity">
+        tools:context=".cs.CsTimerActivity">
 
 
         <FrameLayout

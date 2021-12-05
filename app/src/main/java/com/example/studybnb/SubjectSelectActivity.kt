@@ -3,6 +3,9 @@ package com.example.studybnb
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.studybnb.cs.CsNoteListActivity
+import com.example.studybnb.history.HistoryNoteListActivity
+import com.example.studybnb.toeic.NoteListActivity
 import kotlinx.android.synthetic.main.activity_subject_select.*
 
 class SubjectSelectActivity : AppCompatActivity() {

@@ -1,26 +1,26 @@
-package com.example.studybnb
+package com.example.studybnb.toeic
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.bumptech.glide.Glide
+import com.example.studybnb.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_note_view.*
 import java.text.SimpleDateFormat
 
-class CsNoteViewActivity : AppCompatActivity() {
+class NoteViewActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     var firestore : FirebaseFirestore = FirebaseFirestore.getInstance()
     var storage : FirebaseStorage?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cs_note_view)
+        setContentView(R.layout.activity_note_view)
         auth = FirebaseAuth.getInstance()
         storage = FirebaseStorage.getInstance()
         var date : String? = null
@@ -34,11 +34,12 @@ class CsNoteViewActivity : AppCompatActivity() {
 
 
         back_btn.setOnClickListener {
-            myStartActivity(CsNoteListActivity::class.java)
+            myStartActivity(NoteListActivity::class.java)
             finish()
         }
 
-        firestore?.collection("NoteTaking")?.document("Subjects")?.collection("CS")?.whereEqualTo("date",date?.toLong())
+
+        firestore?.collection("NoteTaking")?.document("Subjects")?.collection("Toeic")?.whereEqualTo("date",date?.toLong())
             ?.get()?.addOnSuccessListener { documents ->
                 for(doc in documents){
                     title_view.text = doc?.data?.get("title").toString()
@@ -63,14 +64,13 @@ class CsNoteViewActivity : AppCompatActivity() {
             mAlertDialog.setMessage("삭제된 노트 기록은 복구할 수 없으며 데이터베이스에서 완전히 삭제됩니다. " +
                     "정말 삭제하겠습니까?")
             mAlertDialog.setPositiveButton("Yes") { dialog, id ->
-                //perform some tasks here
 
-                firestore?.collection("NoteTaking")?.document("Subjects")?.collection("CS")?.document("${auth.currentUser?.uid}_cs_${date}")
+                firestore?.collection("NoteTaking")?.document("Subjects")?.collection("Toeic")?.document("${auth.currentUser?.uid}_toeic_${date}")
                     .delete()
                     .addOnSuccessListener {
                         Toast.makeText(this, "삭제되었습니다.",Toast.LENGTH_LONG).show()
                     }
-                myStartActivity(CsNoteListActivity::class.java)
+                myStartActivity(NoteListActivity::class.java)
                 finish()
 
 

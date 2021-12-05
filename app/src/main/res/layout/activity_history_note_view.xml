@@ -8,7 +8,7 @@
     android:gravity="center_horizontal"
     android:background="@color/white"
 
-    tools:context=".HistoryNoteViewActivity">
+    tools:context=".history.HistoryNoteViewActivity">
 
     <FrameLayout
         android:layout_width="match_parent"

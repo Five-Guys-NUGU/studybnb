@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:background="@color/white"
-    tools:context=".CsNoteWriteActivity">
+    tools:context=".cs.CsNoteWriteActivity">
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
