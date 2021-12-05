@@ -1,42 +1,135 @@
 package com.example.studybnb
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import java.util.Timer
+import android.util.Log
+import androidx.annotation.RequiresApi
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_subject.*
 import kotlinx.android.synthetic.main.activity_subject.back_btn
-import kotlinx.android.synthetic.main.activity_subject.subCS_btn
-import kotlinx.android.synthetic.main.activity_subject.subHistory_btn
-import kotlinx.android.synthetic.main.activity_subject.subTOEIC_btn
+import kotlinx.android.synthetic.main.activity_timer.*
+import java.time.LocalDate
 
 class SubjectActivity : AppCompatActivity() {
+    private lateinit var auth: FirebaseAuth
+    var firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
+    private lateinit var date: String
 
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_subject)
+        var totalStudyTime: Long = 0
+        var historyStudyTime: Long = 0
+        var toeicStudyTime: Long = 0
+        var csStudyTime: Long = 0
+        var studyTime: Long
+        date = LocalDate.now().toString()
 
-        val isTimer = intent?.extras?.getBoolean("isTimer")
+        firestore?.collection("StudyTimer")
+            ?.whereEqualTo("date", date)
+            ?.get()?.addOnSuccessListener { documents ->
+                for (doc in documents) {
+                    if (doc?.data?.get("study_time") != null)//널 값이면 제외
+                    {
+                        studyTime = doc?.data?.get("study_time").toString().toLong()
+                        totalStudyTime += studyTime
+                    }
+
+                }
+                Log.e(totalStudyTime.toString(), "studyTime")
+                var hours = totalStudyTime / 3600;
+                var minutes = (totalStudyTime % 3600) / 60;
+                var seconds = totalStudyTime % 60;
+
+                var timeString = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+                total_time.text=timeString
+            }
+
+        firestore?.collection("StudyTimer")
+            ?.whereEqualTo("subject", "History")
+            ?.whereEqualTo("date", date)
+            ?.get()?.addOnSuccessListener { documents ->
+                for (doc in documents) {
+                    if (doc?.data?.get("study_time") != null)//널 값이면 제외
+                    {
+                        studyTime = doc?.data?.get("study_time").toString().toLong()
+                        historyStudyTime += studyTime
+                    }
+
+                }
+                Log.e(historyStudyTime.toString(), "studyTime")
+                var hours = historyStudyTime / 3600;
+                var minutes = (historyStudyTime % 3600) / 60;
+                var seconds = historyStudyTime % 60;
+
+                var timeString = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+                history_study_time.text=timeString
+            }
+
+        firestore?.collection("StudyTimer")
+            ?.whereEqualTo("subject", "Toeic")
+            ?.whereEqualTo("date", date)
+            ?.get()?.addOnSuccessListener { documents ->
+                for (doc in documents) {
+                    if (doc?.data?.get("study_time") != null)//널 값이면 제외
+                    {
+                        studyTime = doc?.data?.get("study_time").toString().toLong()
+                        toeicStudyTime += studyTime
+                    }
+
+                }
+                Log.e(toeicStudyTime.toString(), "studyTime")
+                var hours = toeicStudyTime / 3600;
+                var minutes = (toeicStudyTime % 3600) / 60;
+                var seconds = toeicStudyTime % 60;
+
+                var timeString = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+                toeic_study_time.text=timeString
+            }
+
+        firestore?.collection("StudyTimer")
+            ?.whereEqualTo("subject", "CS")
+            ?.whereEqualTo("date", date)
+            ?.get()?.addOnSuccessListener { documents ->
+                for (doc in documents) {
+                    if (doc?.data?.get("study_time") != null)//널 값이면 제외
+                    {
+                        studyTime = doc?.data?.get("study_time").toString().toLong()
+                        csStudyTime += studyTime
+                    }
+
+                }
+                Log.e(csStudyTime.toString(), "studyTime")
+                var hours = csStudyTime / 3600;
+                var minutes = (csStudyTime % 3600) / 60;
+                var seconds = csStudyTime % 60;
+
+                var timeString = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+                cs_study_time.text=timeString
+            }
 
         back_btn.setOnClickListener {
             finish()
         }
 
+        subHistory_btn.setOnClickListener {
+            myStartActivity(HistoryTimerActivity::class.java)
+        }
 
+        subTOEIC_btn.setOnClickListener {
+            myStartActivity(TimerActivity::class.java)
+        }
 
-        if ( isTimer == true ) {
-            subHistory_btn.setOnClickListener {
-                myStartActivity(HistoryTimerActivity::class.java)
-            }
-
-            subTOEIC_btn.setOnClickListener {
-                myStartActivity(TimerActivity::class.java)
-            }
-
-            subCS_btn.setOnClickListener {
-                myStartActivity(CsTimerActivity::class.java)
-            }
+        subCS_btn.setOnClickListener {
+            myStartActivity(CsTimerActivity::class.java)
         }
     }
+
 
     private fun myStartActivity(c: Class<*>) {
         val intent = Intent(this, c)

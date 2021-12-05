@@ -6,17 +6,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="@color/studyBNB_blue"
+    android:background="@color/white"
     tools:context=".SubjectSelectActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/ivory">
+        android:background="@color/light_gray">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Subjects"
+            android:text="암기 노트"
             android:textSize="30dp"
             android:textColor="@color/black"
             android:layout_gravity="center"
