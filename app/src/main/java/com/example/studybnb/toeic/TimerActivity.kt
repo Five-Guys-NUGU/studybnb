@@ -62,6 +62,18 @@ class TimerActivity : AppCompatActivity() {
         chronometer = findViewById(R.id.chronometer)
         chronometer.format
 
+        chronometer.setOnChronometerTickListener(Chronometer.OnChronometerTickListener { chronometer ->
+            val time = SystemClock.elapsedRealtime() - chronometer.base
+            val h = (time / 3600000).toInt()
+            val m = (time - h * 3600000).toInt() / 60000
+            val s = (time - h * 3600000 - m * 60000).toInt() / 1000
+            val t =
+                (if (h < 10) "0$h" else h).toString() + ":" + (if (m < 10) "0$m" else m) + ":" + if (s < 10) "0$s" else s
+            chronometer.text = t
+        })
+        chronometer.setBase(SystemClock.elapsedRealtime())
+        chronometer.setText("00:00:00")
+
         back_btn.setOnClickListener {
             showSettingPopup()
         }
