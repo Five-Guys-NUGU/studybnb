@@ -115,11 +115,11 @@
 
     <Button
         android:layout_width="400dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:id="@+id/write_save_btn"
         android:text="저장"
         android:gravity="center"
-        android:textSize="30dp"
+        android:textSize="20dp"
         android:background="@drawable/save_button"
         android:textColor="@color/white"/>
 </LinearLayout>

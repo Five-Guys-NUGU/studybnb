@@ -116,11 +116,11 @@
 
     <Button
         android:layout_width="400dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:id="@+id/delete_btn"
         android:text="삭제"
         android:gravity="center"
-        android:textSize="30dp"
+        android:textSize="20dp"
         android:background="@drawable/delete_button"
         android:textColor="@color/light_red"/>
 

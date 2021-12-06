@@ -39,12 +39,12 @@
             android:overScrollMode="never"/>
         <TextView
             android:layout_width="400dp"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:id="@+id/write_btn"
             android:layout_gravity="bottom|center"
             android:background="@drawable/save_button"
             android:textColor="@color/white"
-            android:textSize="30dp"
+            android:textSize="20dp"
             android:gravity="center"
             android:text="글쓰기" />
     </FrameLayout>

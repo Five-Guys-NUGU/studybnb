@@ -18,15 +18,13 @@ class SettingActivity : AppCompatActivity() {
         email_txt.setText(auth.currentUser?.email)
 
         info_btn.setOnClickListener{
-            var intent = Intent(this, InfoActivity::class.java)
-            startActivity(intent)
+            myStartActivity(InfoActivity :: class.java)
         }
 
         signOut_btn.setOnClickListener {
             auth.signOut()
             Toast.makeText(this,"로그아웃 완료", Toast.LENGTH_SHORT).show()
-            var intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+            myStartActivity(LoginActivity :: class.java)
             finish()
         }
 
@@ -39,8 +37,7 @@ class SettingActivity : AppCompatActivity() {
                 //perform some tasks here
                 deleteId()
                 auth.signOut()
-                val intent = Intent(this, LoginActivity :: class.java )//로그인화면으로 넘어감
-                startActivity(intent)
+                myStartActivity(LoginActivity :: class.java)
                 finish()
             }
             mAlertDialog.setNegativeButton("No") { dialog, id ->
@@ -73,5 +70,11 @@ class SettingActivity : AppCompatActivity() {
                     Toast.makeText(this, "Successful membership withdrawal", Toast.LENGTH_LONG).show()
                 }
             }
+    }
+
+    private fun myStartActivity(c: Class<*>) {
+        val intent = Intent(this, c)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) //액티비티가 여러게 쌓이는 것을 방지. 뒤로가기 누르면 앱 종료.
+        startActivity(intent)
     }
 }
