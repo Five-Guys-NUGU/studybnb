@@ -15,6 +15,7 @@ import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Chronometer
+import android.widget.Chronometer.OnChronometerTickListener
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
@@ -27,6 +28,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_setting.back_btn
 import kotlinx.android.synthetic.main.activity_timer.*
 import java.time.LocalDate
+
 
 class CsTimerActivity : AppCompatActivity() {
     // Firebase setup
@@ -56,6 +58,18 @@ class CsTimerActivity : AppCompatActivity() {
         // Setup the timer
         chronometer = findViewById(R.id.chronometer)
         chronometer.format
+
+        chronometer.setOnChronometerTickListener(OnChronometerTickListener { chronometer ->
+            val time = SystemClock.elapsedRealtime() - chronometer.base
+            val h = (time / 3600000).toInt()
+            val m = (time - h * 3600000).toInt() / 60000
+            val s = (time - h * 3600000 - m * 60000).toInt() / 1000
+            val t =
+                (if (h < 10) "0$h" else h).toString() + ":" + (if (m < 10) "0$m" else m) + ":" + if (s < 10) "0$s" else s
+            chronometer.text = t
+        })
+        chronometer.setBase(SystemClock.elapsedRealtime())
+        chronometer.setText("00:00:00")
 
         back_btn.setOnClickListener {
             showSettingPopup()
