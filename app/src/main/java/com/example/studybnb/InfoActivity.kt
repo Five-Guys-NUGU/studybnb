@@ -22,9 +22,7 @@ class InfoActivity : AppCompatActivity() {
 
 
         back_btn.setOnClickListener {
-            var intent = Intent(this, SettingActivity::class.java)
-            startActivity(intent)
-            finish()
+            myStartActivity(SettingActivity::class.java)
         }
         radio_men.setOnClickListener {
             sex="남자"
