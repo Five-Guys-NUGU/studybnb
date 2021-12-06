@@ -64,7 +64,7 @@
                 android:background="@color/light_gray"
                 android:gravity="center"
                 android:hint="제목을 입력하세요"
-                android:textColor="@color/dark_brown"
+                android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <TextView
@@ -83,7 +83,7 @@
                 android:background="@color/light_gray"
                 android:gravity="center"
                 android:text="클릭하여 날짜 넣기"
-                android:textColor="@color/dark_brown"
+                android:textColor="@color/black"
                 android:textSize="15sp" />
 
 
