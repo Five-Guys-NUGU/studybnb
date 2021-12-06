@@ -18,14 +18,14 @@
             android:layout_height="wrap_content"
             android:text="설정"
             android:textSize="30dp"
-            android:textColor="@color/dark_brown"
+            android:textColor="@color/black"
             android:layout_gravity="center"
             />
         <ImageView
             android:layout_width="60dp"
             android:padding="10dp"
             android:layout_height="60dp"
-            android:src="@drawable/back"
+            android:src="@drawable/back_button"
             android:id="@+id/back_btn"/>
     </FrameLayout>
 
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:text="로그인 정보"
         android:textColor="@color/white"
-        android:textSize="30dp"
+        android:textSize="25dp"
         android:layout_marginTop="50dp"/>
 
     <TextView
@@ -45,39 +45,39 @@
         android:background="@color/ivory"
         android:gravity="center"
         android:text="로그인 이메일"
-        android:textColor="@color/dark_brown"
+        android:textColor="@color/black"
         android:textSize="15dp"
         android:textStyle="bold" />
 
     <Button
         android:layout_width="250dp"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:id="@+id/info_btn"
         android:layout_marginTop="30dp"
-        android:backgroundTint="@color/gray"
+        android:background="@drawable/select_button3"
         android:text="회원 정보 입력/수정"
-        android:textSize="20dp"
-        android:textColor="@color/white"/>
+        android:textSize="15dp"
+        android:textColor="@color/black"/>
 
     <Button
         android:layout_width="250dp"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:id="@+id/contact_btn"
         android:layout_marginTop="10dp"
-        android:backgroundTint="@color/gray"
+        android:background="@drawable/select_button3"
         android:text="문의하기"
-        android:textSize="20dp"
-        android:textColor="@color/white"/>
+        android:textSize="15dp"
+        android:textColor="@color/black"/>
 
     <Button
         android:id="@+id/signOut_btn"
         android:layout_width="250dp"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_marginTop="10dp"
-        android:backgroundTint="@color/gray"
+        android:background="@drawable/select_button3"
         android:text="로그아웃"
-        android:textColor="@color/white"
-        android:textSize="20dp" />
+        android:textColor="@color/black"
+        android:textSize="15dp" />
 
     <Button
         android:layout_width="250dp"
@@ -86,7 +86,7 @@
         android:id="@+id/withdrawal_btn"
         android:backgroundTint="@color/light_red"
         android:text="탈퇴하기"
-        android:textSize="20dp"
+        android:textSize="15dp"
         android:textColor="@color/white"/>
 
 

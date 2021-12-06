@@ -60,13 +60,13 @@
 
     <Button
         android:id="@+id/subHistory_btn"
-        android:layout_width="200dp"
-        android:layout_height="70dp"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:layout_marginTop="80dp"
         android:background="@drawable/select_button1"
         android:text="한국사"
         android:textColor="@color/black"
-        android:textSize="25dp" />
+        android:textSize="18dp" />
 
     <TextView
         android:id="@+id/history_study_time"
@@ -79,13 +79,13 @@
 
     <Button
         android:id="@+id/subTOEIC_btn"
-        android:layout_width="200dp"
-        android:layout_height="70dp"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/select_button1"
         android:text="TOEIC"
         android:textColor="@color/black"
-        android:textSize="25dp" />
+        android:textSize="18dp" />
 
     <TextView
         android:id="@+id/toeic_study_time"
@@ -98,13 +98,13 @@
 
     <Button
         android:id="@+id/subCS_btn"
-        android:layout_width="200dp"
-        android:layout_height="70dp"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/select_button1"
         android:text="컴퓨터 활용 능력"
         android:textColor="@color/black"
-        android:textSize="20dp" />
+        android:textSize="18dp" />
 
     <TextView
         android:id="@+id/cs_study_time"
@@ -113,6 +113,6 @@
         android:layout_gravity="center"
         android:text="00:00:00"
         android:textColor="@color/black"
-        android:textSize="20dp" />
+        android:textSize="18dp" />
 
 </LinearLayout>
