@@ -56,7 +56,6 @@ class HistoryTimerActivity : AppCompatActivity() {
         // Setup the timer
         chronometer = findViewById(R.id.chronometer)
         chronometer.format
-게
         chronometer.setOnChronometerTickListener(Chronometer.OnChronometerTickListener { chronometer ->
             val time = SystemClock.elapsedRealtime() - chronometer.base
             val h = (time / 3600000).toInt()
