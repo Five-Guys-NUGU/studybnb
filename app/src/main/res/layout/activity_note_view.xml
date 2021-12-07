@@ -70,7 +70,9 @@
                 android:background="@color/light_gray"
                 android:gravity="center"
                 android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:fontFamily="@font/app_main_font"
+                />
 
             <TextView
                 android:layout_width="300dp"
@@ -90,7 +92,9 @@
                 android:background="@color/light_gray"
                 android:gravity="center"
                 android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:fontFamily="@font/app_main_font"
+                />
 
 
             <TextView
@@ -111,7 +115,9 @@
                 android:background="@color/light_gray"
                 android:gravity="center"
                 android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:fontFamily="@font/app_main_font"
+                />
 
 
             <TextView
