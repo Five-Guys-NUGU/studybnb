@@ -80,7 +80,9 @@ class NoteWriteActivity : AppCompatActivity() {
             noteModel.title = title_view.text.toString()
             noteModel.contents=contents_view.text.toString()
 
-            firestore?.collection("NoteTaking")?.document("Subjects")?.collection("Toeic")?.document("${auth?.currentUser?.uid}_toeic_${cal.timeInMillis}")?.set(noteModel)
+            firestore?.collection("NoteTaking")?.document("${auth?.currentUser?.uid}")
+                ?.collection("Toeic")
+                ?.document("${auth?.currentUser?.uid}_toeic_${cal.timeInMillis}")?.set(noteModel)
 
             uploadImageToFirebaseStorage()//사진 올리는 코드
             myStartActivity(NoteListActivity::class.java)
@@ -128,16 +130,22 @@ class NoteWriteActivity : AppCompatActivity() {
             ref.putFile(uri)
                 .addOnSuccessListener {
                     ref.downloadUrl.addOnSuccessListener {
-                        firestore?.collection("NoteTaking")?.document("Subjects")?.collection("Toeic")?.document("${auth?.currentUser?.uid}_toeic_${cal.timeInMillis}")?.update("img_src",imgFileName)
-                    }
+                        firestore?.collection("NoteTaking")
+                            ?.document("${auth?.currentUser?.uid}")
+                            ?.collection("Toeic")
+                            ?.document("${auth?.currentUser?.uid}_toeic_${cal.timeInMillis}")
+                            ?.update("img_src",imgFileName)                    }
                 }
         }else{
             ref.putFile(selectedPhotoUri!!) //selected Photo된거 uri를 file형태로 ref에 넣음.
                 //이미지 업로드
                 .addOnSuccessListener {
                     ref.downloadUrl.addOnSuccessListener {
-                        firestore?.collection("NoteTaking")?.document("Subjects")?.collection("Toeic")?.document("${auth?.currentUser?.uid}_toeic_${cal.timeInMillis}")?.update("img_src",imgFileName)
-                    }
+                        firestore?.collection("NoteTaking")
+                            ?.document("${auth?.currentUser?.uid}")
+                            ?.collection("Toeic")
+                            ?.document("${auth?.currentUser?.uid}_toeic_${cal.timeInMillis}")
+                            ?.update("img_src",imgFileName)                    }
                 }
                 .addOnFailureListener{ //실패하면
                 }

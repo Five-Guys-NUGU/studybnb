@@ -39,7 +39,9 @@ class NoteViewActivity : AppCompatActivity() {
         }
 
 
-        firestore?.collection("NoteTaking")?.document("Subjects")?.collection("Toeic")?.whereEqualTo("date",date?.toLong())
+        firestore?.collection("NoteTaking")
+            ?.document("${auth?.currentUser?.uid}")
+            ?.collection("Toeic")?.whereEqualTo("date",date?.toLong())
             ?.get()?.addOnSuccessListener { documents ->
                 for(doc in documents){
                     title_view.text = doc?.data?.get("title").toString()
@@ -65,7 +67,10 @@ class NoteViewActivity : AppCompatActivity() {
                     "정말 삭제하겠습니까?")
             mAlertDialog.setPositiveButton("Yes") { dialog, id ->
 
-                firestore?.collection("NoteTaking")?.document("Subjects")?.collection("Toeic")?.document("${auth.currentUser?.uid}_toeic_${date}")
+                firestore?.collection("NoteTaking")
+                    ?.document("${auth?.currentUser?.uid}")
+                    ?.collection("Toeic")
+                    ?.document("${auth.currentUser?.uid}_toeic_${date}")
                     .delete()
                     .addOnSuccessListener {
                         Toast.makeText(this, "삭제되었습니다.",Toast.LENGTH_LONG).show()

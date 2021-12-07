@@ -24,7 +24,10 @@ class HistoryItemAdapter(private val context: Context): RecyclerView.Adapter<Rec
     init {
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
-        firestore?.collection("NoteTaking")?.document("Subjects")?.collection("History")?.whereEqualTo("uid", auth.currentUser?.uid)
+
+        firestore?.collection("NoteTaking")
+            ?.document("${auth?.currentUser?.uid}")
+            ?.collection("History")?.whereEqualTo("uid", auth.currentUser?.uid)
             ?.get()?.addOnSuccessListener { documents ->
                 itemList.clear()
                 for (doc in documents) {

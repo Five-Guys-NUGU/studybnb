@@ -39,7 +39,10 @@ class HistoryNoteViewActivity : AppCompatActivity() {
         }
 
 
-        firestore?.collection("NoteTaking")?.document("Subjects")?.collection("History")?.whereEqualTo("date",date?.toLong())
+
+        firestore?.collection("NoteTaking")
+            ?.document("${auth?.currentUser?.uid}")
+            ?.collection("History")?.whereEqualTo("date",date?.toLong())
             ?.get()?.addOnSuccessListener { documents ->
                 for(doc in documents){
                     title_view.text = doc?.data?.get("title").toString()
@@ -64,7 +67,10 @@ class HistoryNoteViewActivity : AppCompatActivity() {
             mAlertDialog.setMessage("삭제된 노트 기록은 복구할 수 없으며 데이터베이스에서 완전히 삭제됩니다. " +
                     "정말 삭제하겠습니까?")
             mAlertDialog.setPositiveButton("Yes") { dialog, id ->
-                firestore?.collection("NoteTaking")?.document("Subjects")?.collection("History")?.document("${auth.currentUser?.uid}_history_${date}")
+                firestore?.collection("NoteTaking")
+                    ?.document("${auth?.currentUser?.uid}")
+                    ?.collection("History")
+                    ?.document("${auth.currentUser?.uid}_history_${date}")
                     .delete()
                     .addOnSuccessListener {
                         Toast.makeText(this, "삭제되었습니다.",Toast.LENGTH_LONG).show()
