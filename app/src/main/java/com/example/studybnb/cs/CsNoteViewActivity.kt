@@ -67,7 +67,10 @@ class CsNoteViewActivity : AppCompatActivity() {
             mAlertDialog.setPositiveButton("Yes") { dialog, id ->
                 //perform some tasks here
 
-                firestore?.collection("NoteTaking")?.document("Subjects")?.collection("CS")?.document("${auth.currentUser?.uid}_cs_${date}")
+                firestore?.collection("NoteTaking")
+                    ?.document("${auth?.currentUser?.uid}")
+                    ?.collection("CS")
+                    ?.document("${auth.currentUser?.uid}_cs_${date}")
                     .delete()
                     .addOnSuccessListener {
                         Toast.makeText(this, "삭제되었습니다.",Toast.LENGTH_LONG).show()
