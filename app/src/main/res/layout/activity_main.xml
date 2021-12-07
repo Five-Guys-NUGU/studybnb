@@ -24,7 +24,9 @@
         android:background="@drawable/select_button1"
         android:text="공부 시작"
         android:textColor="@color/black"
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        android:fontFamily="@font/app_main_font"
+        />
 
 
     <Button
@@ -35,7 +37,9 @@
         android:background="@drawable/select_button1"
         android:text="암기 노트"
         android:textColor="@color/black"
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        android:fontFamily="@font/app_main_font"
+        />
 
     <Button
         android:id="@+id/setting_btn"
@@ -45,6 +49,8 @@
         android:background="@drawable/select_button1"
         android:text="설정"
         android:textColor="@color/black"
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        android:fontFamily="@font/app_main_font"
+        />
 
 </LinearLayout>

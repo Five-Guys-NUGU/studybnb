@@ -26,7 +26,9 @@
                 android:layout_gravity="center"
                 android:text="한국사"
                 android:textColor="@color/black"
-                android:textSize="30dp" />
+                android:textSize="30dp"
+                android:fontFamily="@font/app_main_font"
+                />
 
             <ImageView
                 android:id="@+id/back_btn"
@@ -46,7 +48,9 @@
             android:text="00:00:00"
             android:textColor="@color/studyBNB_blue"
             android:textSize="60dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:fontFamily="@font/app_main_font"
+            />
 
         <Button
             android:id="@+id/start_timer_btn"
@@ -57,7 +61,9 @@
             android:onClick="startTimer"
             android:text="Start"
             android:textColor="@color/white"
-            android:textSize="40dp" />
+            android:textSize="40dp"
+            android:fontFamily="@font/app_main_font"
+            />
 
         <Button
             android:id="@+id/finish_timer_btn"
@@ -67,7 +73,9 @@
             android:background="@drawable/delete_button"
             android:text="Finish"
             android:textColor="@color/light_red"
-            android:textSize="40dp" />
+            android:textSize="40dp"
+            android:fontFamily="@font/app_main_font"
+            />
 
     </LinearLayout>
 

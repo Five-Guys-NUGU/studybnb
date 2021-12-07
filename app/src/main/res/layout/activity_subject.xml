@@ -20,6 +20,7 @@
             android:textSize="30dp"
             android:textColor="@color/black"
             android:layout_gravity="center"
+            android:fontFamily="@font/app_main_font"
             />
         <ImageView
             android:layout_width="60dp"
@@ -44,17 +45,21 @@
             android:layout_gravity="center"
             android:text="오늘 날짜"
             android:textColor="@color/black"
-            android:textSize="15dp" />
+            android:textSize="15dp"
+            android:fontFamily="@font/app_main_font"
+            />
 
         <TextView
             android:id="@+id/total_time"
-            android:text="00:00:00"
-            android:layout_marginTop="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:text="00:00:00"
             android:textColor="@color/black"
-            android:layout_gravity="center"/>
+            android:textSize="30dp"
+            android:fontFamily="@font/app_main_font"
+            />
     </FrameLayout>
 
 
@@ -66,7 +71,9 @@
         android:background="@drawable/select_button1"
         android:text="한국사"
         android:textColor="@color/black"
-        android:textSize="18dp" />
+        android:textSize="18dp"
+        android:fontFamily="@font/app_main_font"
+        />
 
     <TextView
         android:id="@+id/history_study_time"
@@ -75,7 +82,9 @@
         android:layout_gravity="center"
         android:text="00:00:00"
         android:textColor="@color/black"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:fontFamily="@font/app_main_font"
+        />
 
     <Button
         android:id="@+id/subTOEIC_btn"
@@ -85,7 +94,9 @@
         android:background="@drawable/select_button1"
         android:text="TOEIC"
         android:textColor="@color/black"
-        android:textSize="18dp" />
+        android:textSize="18dp"
+        android:fontFamily="@font/app_main_font"
+        />
 
     <TextView
         android:id="@+id/toeic_study_time"
@@ -94,7 +105,9 @@
         android:layout_gravity="center"
         android:text="00:00:00"
         android:textColor="@color/black"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:fontFamily="@font/app_main_font"
+        />
 
     <Button
         android:id="@+id/subCS_btn"
@@ -104,7 +117,9 @@
         android:background="@drawable/select_button1"
         android:text="컴퓨터 활용 능력"
         android:textColor="@color/black"
-        android:textSize="18dp" />
+        android:textSize="18dp"
+        android:fontFamily="@font/app_main_font"
+        />
 
     <TextView
         android:id="@+id/cs_study_time"
@@ -113,6 +128,8 @@
         android:layout_gravity="center"
         android:text="00:00:00"
         android:textColor="@color/black"
-        android:textSize="18dp" />
+        android:textSize="18dp"
+        android:fontFamily="@font/app_main_font"
+        />
 
 </LinearLayout>

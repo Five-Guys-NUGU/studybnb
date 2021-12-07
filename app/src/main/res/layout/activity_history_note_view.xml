@@ -27,7 +27,9 @@
             android:layout_gravity="center"
             android:text="한국사"
             android:textColor="@color/black"
-            android:textSize="30dp" />
+            android:textSize="30dp"
+            android:fontFamily="@font/app_main_font"
+            />
     </FrameLayout>
 
     <ScrollView
@@ -57,7 +59,9 @@
                 android:layout_marginTop="10dp"
                 android:text="제목"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:fontFamily="@font/app_main_font"
+                />
 
             <TextView
                 android:layout_width="300dp"
@@ -75,7 +79,9 @@
                 android:layout_marginTop="10dp"
                 android:text="날짜"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:fontFamily="@font/app_main_font"
+                />
 
             <TextView
                 android:id="@+id/date_view"
@@ -94,7 +100,9 @@
                 android:layout_marginTop="10dp"
                 android:text="내용"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:fontFamily="@font/app_main_font"
+                />
 
             <TextView
                 android:layout_width="300dp"
@@ -121,7 +129,9 @@
         android:gravity="center"
         android:textSize="20dp"
         android:background="@drawable/delete_button"
-        android:textColor="@color/light_red"/>
+        android:textColor="@color/light_red"
+        android:fontFamily="@font/app_main_font"
+        />
 
 
 </LinearLayout>
