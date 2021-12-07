@@ -77,7 +77,9 @@ class HistoryNoteWriteActivity : AppCompatActivity() {
             noteModel.title = title_view.text.toString()
             noteModel.contents=contents_view.text.toString()
 
-            firestore?.collection("NoteTaking")?.document("Subjects")?.collection("History")?.document("${auth?.currentUser?.uid}_history_${cal.timeInMillis}")?.set(noteModel)
+            firestore?.collection("NoteTaking")?.document("${auth?.currentUser?.uid}")
+                ?.collection("History")
+                ?.document("${auth?.currentUser?.uid}_history_${cal.timeInMillis}")?.set(noteModel)
 
             uploadImageToFirebaseStorage()//사진 올리는 코드
             myStartActivity(HistoryNoteListActivity::class.java)
@@ -112,7 +114,11 @@ class HistoryNoteWriteActivity : AppCompatActivity() {
             ref.putFile(uri)
                 .addOnSuccessListener {
                     ref.downloadUrl.addOnSuccessListener {
-                        firestore?.collection("NoteTaking")?.document("Subjects")?.collection("History")?.document("${auth?.currentUser?.uid}_history_${cal.timeInMillis}")?.update("img_src",imgFileName)
+                        firestore?.collection("NoteTaking")
+                            ?.document("${auth?.currentUser?.uid}")
+                            ?.collection("History")
+                            ?.document("${auth?.currentUser?.uid}_history_${cal.timeInMillis}")
+                            ?.update("img_src",imgFileName)
 
 
                     }
@@ -123,8 +129,11 @@ class HistoryNoteWriteActivity : AppCompatActivity() {
                 .addOnSuccessListener {
                     ref.downloadUrl.addOnSuccessListener {
 
-                        firestore?.collection("NoteTaking")?.document("Subjects")?.collection("History")?.document("${auth?.currentUser?.uid}_history_${cal.timeInMillis}")?.update("img_src",imgFileName)
-
+                        firestore?.collection("NoteTaking")
+                            ?.document("${auth?.currentUser?.uid}")
+                            ?.collection("History")
+                            ?.document("${auth?.currentUser?.uid}_history_${cal.timeInMillis}")
+                            ?.update("img_src",imgFileName)
 
                     }
                 }

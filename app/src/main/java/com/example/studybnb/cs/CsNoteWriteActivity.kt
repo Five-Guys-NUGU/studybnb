@@ -77,8 +77,9 @@ class CsNoteWriteActivity : AppCompatActivity() {
             noteModel.title = title_view.text.toString()
             noteModel.contents=contents_view.text.toString()
 
-            firestore?.collection("NoteTaking")?.document("Subjects")?.collection("CS")?.document("${auth?.currentUser?.uid}_cs_${cal.timeInMillis}")?.set(noteModel)
-
+            firestore?.collection("NoteTaking")?.document("${auth?.currentUser?.uid}")
+                ?.collection("CS")
+                ?.document("${auth?.currentUser?.uid}_cs_${cal.timeInMillis}")?.set(noteModel)
             uploadImageToFirebaseStorage()//사진 올리는 코드
             myStartActivity(CsNoteListActivity::class.java)
             finish()
@@ -112,8 +113,11 @@ class CsNoteWriteActivity : AppCompatActivity() {
             ref.putFile(uri)
                 .addOnSuccessListener {
                     ref.downloadUrl.addOnSuccessListener {
-                        firestore?.collection("NoteTaking")?.document("Subjects")?.collection("CS")?.document("${auth?.currentUser?.uid}_cs_${cal.timeInMillis}")?.update("img_src",imgFileName)
-
+                        firestore?.collection("NoteTaking")
+                            ?.document("${auth?.currentUser?.uid}")
+                            ?.collection("CS")
+                            ?.document("${auth?.currentUser?.uid}_cs_${cal.timeInMillis}")
+                            ?.update("img_src",imgFileName)
 
                     }
                 }
@@ -122,9 +126,11 @@ class CsNoteWriteActivity : AppCompatActivity() {
                 //이미지 업로드
                 .addOnSuccessListener {
                     ref.downloadUrl.addOnSuccessListener {
-
-                        firestore?.collection("NoteTaking")?.document("Subjects")?.collection("CS")?.document("${auth?.currentUser?.uid}_cs_${cal.timeInMillis}")?.update("img_src",imgFileName)
-
+                        firestore?.collection("NoteTaking")
+                            ?.document("${auth?.currentUser?.uid}")
+                            ?.collection("CS")
+                            ?.document("${auth?.currentUser?.uid}_cs_${cal.timeInMillis}")
+                            ?.update("img_src",imgFileName)
 
                     }
                 }

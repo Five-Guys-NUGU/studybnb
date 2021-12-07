@@ -38,7 +38,9 @@ class CsNoteViewActivity : AppCompatActivity() {
             finish()
         }
 
-        firestore?.collection("NoteTaking")?.document("Subjects")?.collection("CS")?.whereEqualTo("date",date?.toLong())
+        firestore?.collection("NoteTaking")
+            ?.document("${auth?.currentUser?.uid}")
+            ?.collection("CS")?.whereEqualTo("date",date?.toLong())
             ?.get()?.addOnSuccessListener { documents ->
                 for(doc in documents){
                     title_view.text = doc?.data?.get("title").toString()

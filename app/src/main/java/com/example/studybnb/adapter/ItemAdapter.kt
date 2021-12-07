@@ -24,8 +24,9 @@ class ItemAdapter(private val context: Context): RecyclerView.Adapter<RecyclerVi
     init {
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
-        firestore?.collection("NoteTaking")?.document("Subjects")?.collection("Toeic")?.whereEqualTo("uid", auth.currentUser?.uid)
-            ?.get()?.addOnSuccessListener { documents ->
+        firestore?.collection("NoteTaking")
+            ?.document("${auth?.currentUser?.uid}")
+            ?.collection("Toeic")?.whereEqualTo("uid", auth.currentUser?.uid)            ?.get()?.addOnSuccessListener { documents ->
                 itemList.clear()
                 for (doc in documents) {
                     title = doc?.data?.get("title").toString()
