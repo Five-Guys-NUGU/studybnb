@@ -99,6 +99,8 @@ class TimerActivity : AppCompatActivity() {
             studyTimerModel.date = LocalDate.now().toString()
 
             firestore?.collection("StudyTimer")?.
+            document("${auth?.currentUser?.uid}")?.
+            collection("${date}")?.
             document("${auth?.currentUser?.uid+"_"+studyTimerModel.start_time}")?.set(studyTimerModel)
 
             firestore?.collection("User")?.
@@ -123,12 +125,17 @@ class TimerActivity : AppCompatActivity() {
                 studyTimerModel.finish_time = System.currentTimeMillis()
 
                 firestore?.collection("StudyTimer")?.
+                document("${auth?.currentUser?.uid}")?.
+                collection("${date}")?.
                 document("${auth?.currentUser?.uid+"_"+studyTimerModel.start_time}")?.
                 update(mapOf("finish_time" to studyTimerModel.finish_time))
 
                 firestore?.collection("StudyTimer")?.
+                document("${auth?.currentUser?.uid}")?.
+                collection("${date}")?.
                 document("${auth?.currentUser?.uid+"_"+studyTimerModel.start_time}")?.
                 update(mapOf("study_time" to studyTimerModel.study_time))
+
 
 
                 firestore?.collection("User")?.

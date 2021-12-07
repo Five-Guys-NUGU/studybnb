@@ -30,11 +30,15 @@ class SubjectActivity : AppCompatActivity() {
         var toeicStudyTime: Long = 0
         var csStudyTime: Long = 0
         var studyTime: Long
+
+        auth = FirebaseAuth.getInstance()
         date = LocalDate.now().toString()
 
         today_date.text=date
 
         firestore?.collection("StudyTimer")
+            ?.document("${auth?.currentUser?.uid}")
+            ?.collection("${date}")
             ?.whereEqualTo("date", date)
             ?.get()?.addOnSuccessListener { documents ->
                 for (doc in documents) {
@@ -55,6 +59,8 @@ class SubjectActivity : AppCompatActivity() {
             }
 
         firestore?.collection("StudyTimer")
+            ?.document("${auth?.currentUser?.uid}")
+            ?.collection("${date}")
             ?.whereEqualTo("subject", "History")
             ?.whereEqualTo("date", date)
             ?.get()?.addOnSuccessListener { documents ->
@@ -76,6 +82,8 @@ class SubjectActivity : AppCompatActivity() {
             }
 
         firestore?.collection("StudyTimer")
+            ?.document("${auth?.currentUser?.uid}")
+            ?.collection("${date}")
             ?.whereEqualTo("subject", "Toeic")
             ?.whereEqualTo("date", date)
             ?.get()?.addOnSuccessListener { documents ->
@@ -97,6 +105,8 @@ class SubjectActivity : AppCompatActivity() {
             }
 
         firestore?.collection("StudyTimer")
+            ?.document("${auth?.currentUser?.uid}")
+            ?.collection("${date}")
             ?.whereEqualTo("subject", "CS")
             ?.whereEqualTo("date", date)
             ?.get()?.addOnSuccessListener { documents ->
