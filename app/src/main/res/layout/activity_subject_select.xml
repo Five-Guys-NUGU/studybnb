@@ -20,6 +20,7 @@
             android:textSize="30dp"
             android:textColor="@color/black"
             android:layout_gravity="center"
+            android:fontFamily="@font/app_main_font"
             />
 
         <ImageView
@@ -38,7 +39,9 @@
         android:background="@drawable/select_button1"
         android:text="한국사"
         android:textColor="@color/black"
-        android:textSize="18dp" />
+        android:textSize="18dp"
+        android:fontFamily="@font/app_main_font"
+        />
 
 
     <Button
@@ -49,7 +52,9 @@
         android:background="@drawable/select_button1"
         android:text="TOEIC"
         android:textColor="@color/black"
-        android:textSize="18dp" />
+        android:textSize="18dp"
+        android:fontFamily="@font/app_main_font"
+        />
 
     <Button
         android:id="@+id/subCS_btn"
@@ -59,6 +64,8 @@
         android:background="@drawable/select_button1"
         android:text="컴퓨터 활용 능력"
         android:textColor="@color/black"
-        android:textSize="18dp" />
+        android:textSize="18dp"
+        android:fontFamily="@font/app_main_font"
+        />
 
 </LinearLayout>

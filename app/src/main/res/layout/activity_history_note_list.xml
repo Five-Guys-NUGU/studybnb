@@ -25,7 +25,9 @@
             android:layout_gravity="center"
             android:text="한국사"
             android:textColor="@color/black"
-            android:textSize="30dp" />
+            android:textSize="30dp"
+            android:fontFamily="@font/app_main_font"
+            />
     </FrameLayout>
 
     <FrameLayout
@@ -46,7 +48,9 @@
             android:textColor="@color/white"
             android:textSize="20dp"
             android:gravity="center"
-            android:text="글쓰기" />
+            android:text="글쓰기"
+            android:fontFamily="@font/app_main_font"
+            />
     </FrameLayout>
 
 </LinearLayout>

@@ -23,7 +23,8 @@
         android:backgroundTint="@color/brown"
         android:layout_marginTop="50dp"
         android:textSize="25dp"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        />
 
     <Button
         android:layout_width="300dp"
@@ -33,7 +34,9 @@
         android:text="문의하기"
         android:layout_marginTop="10dp"
         android:textSize="15dp"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:fontFamily="@font/app_main_font"
+        />
 
 
 </LinearLayout>
