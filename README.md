@@ -1,6 +1,6 @@
 # StudyBNB
 HYU AI/SE project 21-2 \
-Friend-like software that helps us study efficiently 'StudyBNB'
+Friend-like software that helps us study efficiently, 'StudyBNB'
 
 ## Members
 - Kim Useong, jeneve1@hanyang.ac.kr
@@ -11,7 +11,7 @@ Friend-like software that helps us study efficiently 'StudyBNB'
 
 ## Links
 - Notion page: https://ancient-fighter-d30.notion.site/StudyBNB-c63a5795d9de42758a436764d5bca04d
-- Explanation & Demo Video: 
+- Demo Video: https://www.youtube.com/watch?v=EPOi7vhCWR0
 - Documentation: https://github.com/Five-Guys-NUGU/documentation
 
 ## Proposal
@@ -37,8 +37,22 @@ Studying and reading is always present in our daily life, especially as a colleg
 - https://play.google.com/store/apps/details?id=co.riiid.vida
 
 ## Development Environment
+### Application
+- Tool: Android Studio
+- Language: Kotlin
+- API: Google Vision API
 
+### Server
+- Tool: Visual Studio Code
+- Language: Python
+- Database: Firebase(Firestore)
+- Cloud Server: AWS EC2
+- Backend: Flask
 
+### AI Model
+- Tool: Visual Studio Code
+- Language: Python
+- API: Scikit-learn
 
 ## Overall Architecture
 ![image](https://user-images.githubusercontent.com/49526312/145183348-75c0a4d4-2426-4faa-9aec-afa82986507b.png)
@@ -49,7 +63,7 @@ Frontend is represented by the mobile app and the NUGU speaker. The former one a
 Backend is represented by the cloud consisting of the backend capabilities of Firebase and its Firestore database. The functions from the frontend save and retrieve data in Firebase. Another part of the backend is the app server which is built on the Python web-framework Flask. The app server has an timer function that uses words from the NUGU speaker and data from Firebase as input and starts the timer. For machine learning capabilities, data from the Firestore database is used to train the model for image recognition and matching users capabilities. Inside the app server the model will be applied for the notes function.
 
 ## Methodology
-### A. StudyMate
+### StudyMate
 
 - Why is it K-mean Clustering?
     
@@ -118,7 +132,7 @@ Backend is represented by the cloud consisting of the backend capabilities of Fi
     ```
     
 
-### B. Note-taking
+### Note-taking
 
 - OCR in Android Application
     
@@ -155,13 +169,13 @@ if(requestCode == 0 && resultCode == Activity.RESULT_OK && data != null){
     }
 ```
 ## Evaluation & Analysis
-### A. StudyMate
+### StudyMate
 
 - Before / After Normalization
     
     Before normalization, the scale of 'total_study_time' is very large compared to 'avg_study_time', whereas after normalization, the two features show the same scale.
     
-    Before Normalization             |  After Normalization
+    Before Normalization |  After Normalization
     :-------------------------:|:-------------------------:
     ![image](https://user-images.githubusercontent.com/49526312/145191795-9cc58ede-9a2b-4f8a-8da1-0d8d7df27e27.png)  |  ![image](https://user-images.githubusercontent.com/49526312/145191813-b44c5313-8e3c-415f-828a-a8dd9bb057d0.png)
 - Silhouette Score
@@ -177,22 +191,66 @@ if(requestCode == 0 && resultCode == Activity.RESULT_OK && data != null){
     ![image](https://user-images.githubusercontent.com/49526312/145191624-0ab0cb22-bfd6-41b1-aee5-bf75f42db9d7.png)
 
 
-### B. Note-taking
+### Note-taking
 
 - Data recognition accuracy was checked by comparing/analyzing the similarity between the text in the image and the text converted into the image.
 - As a result of analyzing the accuracy of data recognition by collecting about 30 pieces of data, it showed about 98.6% accuracy.
 
 ## Use cases
-### Mobile application
+### Android application
+- Login/Main pages
+
+Login page | Main page | Setting page
+:-------------------------:|:-------------------------:|:-------------------------:
+![login_1](https://user-images.githubusercontent.com/49526312/145215100-a6bff55b-e11f-4005-afb3-e42b7d670395.jpg) | ![login_2](https://user-images.githubusercontent.com/49526312/145215102-b3e21e3e-37b3-4f51-a408-5654c2fd97e4.jpg) | ![login_3](https://user-images.githubusercontent.com/49526312/145215094-e1ff7f5b-e569-4a6f-b891-c2274b138554.jpg)
+
+- Timer
+
+Measuring time | Attempt to change screen | Today's cumulative learning time.
+:-------------------------:|:-------------------------:|:-------------------------:
+![timer_1](https://user-images.githubusercontent.com/49526312/145213939-dd3b77bc-dd17-48a7-9b27-c25cacaa431a.jpg)  |  ![timer_2](https://user-images.githubusercontent.com/49526312/145213941-5a3a259b-dc30-4dae-a988-b7e52ce1a2d6.jpg)  |  ![timer_3](https://user-images.githubusercontent.com/49526312/145213937-0c91d3f6-eb8b-4908-b97a-7b314d40c894.jpg)
+
+- Note-taking
+
+List of subjects | List of notes | One of the lists
+:-------------------------:|:-------------------------:|:-------------------------:
+![note_1](https://user-images.githubusercontent.com/49526312/145214782-c91dcf88-a6bf-41ea-be94-951b274ad475.jpg) | ![note_2](https://user-images.githubusercontent.com/49526312/145214772-985a0221-f474-4bff-afff-715e5cea962b.jpg) | ![note_3](https://user-images.githubusercontent.com/49526312/145214777-37dc7b3d-109d-4fce-b1e0-f95b6b355b46.jpg)
 
 
 ### NUGU AI Speaker
+#### Installation
+If the user purchases the NUGU Speaker, completes the speaker setup, and installs the NUGU application on the user's smartphone, the user is ready to use StudyBNB. If you press the menu in the upper left corner on the main screen of the NUGU application on your smartphone, StudyBNB exists in the Education/Childcare tab of the NUGU Play category.
 
+#### Starting Application: 
+- Command: "Aria, start StudyBNB"
+
+#### Start Timer
+- Command: "Aria, Start timer for SUBJECT(including Korean History Exam, TOEIC, Computer Specialist in Spreadsheet & Database(CS)) from BNB"
+
+#### Finish Timer
+- Command: "Aria, Finish timer from BNB" 
+
+#### Calculate study time for now
+- Command: "Tell me what time I studied from BNB"
+
+#### Calculate study time by subject or date
+- Command: "Tell me how long I studied the TOEIC yesterday from BNB"
+
+#### Read Studynote
+- Command: "Read wrong answer note of SUBJECT(like TOEIC, Korean History, CS) from BNB"
+
+#### Get studymate's information
+- Command: "Tell me how much my studymate studyied from BNB"
 
 ## User guide
 ### Installation
+- Android Application
 
-### Deletion
+Our application will be released in the Play Store. Users will be able to download our aplication in Play Store. You can find our application with keywords such as 'studybnb', 'study timer', 'note-taking', 'studymate'.
+
+- NUGU AI Speaker
+ 
+If the user purchases the NUGU Speaker, completes the speaker setup, and installs the NUGU application on the user's smartphone, the user is ready to use StudyBNB. If you press the menu in the upper left corner on the main screen of the NUGU application on your smartphone, StudyBNB exists in the Education/Childcare tab of the NUGU Play category.
 
 ## Conclusion
 When we first started our development plan, we planned to provide two paths: smartphone apps and AI speakers with two AI-based services: StudyMate and Note-taking.
