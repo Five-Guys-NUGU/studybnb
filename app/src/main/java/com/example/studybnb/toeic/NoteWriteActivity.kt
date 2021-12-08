@@ -50,6 +50,7 @@ class NoteWriteActivity : AppCompatActivity() {
 
         back_btn.setOnClickListener {
             myStartActivity(NoteListActivity::class.java)
+            finish()
         }
 
         img_btn.setOnClickListener {

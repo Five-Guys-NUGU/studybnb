@@ -22,9 +22,11 @@ class CsNoteListActivity : AppCompatActivity() {
 
         back_btn.setOnClickListener {
             myStartActivity(SubjectSelectActivity::class.java)
+            finish()
         }
         write_btn.setOnClickListener {
             myStartActivity(CsNoteWriteActivity::class.java)
+            finish()
         }
         val layoutManager = LinearLayoutManager(this)
         layoutManager.setReverseLayout(true)
