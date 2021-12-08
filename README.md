@@ -62,6 +62,22 @@ Frontend is represented by the mobile app and the NUGU speaker. The former one a
 
 Backend is represented by the cloud consisting of the backend capabilities of Firebase and its Firestore database. The functions from the frontend save and retrieve data in Firebase. Another part of the backend is the app server which is built on the Python web-framework Flask. The app server has an timer function that uses words from the NUGU speaker and data from Firebase as input and starts the timer. For machine learning capabilities, data from the Firestore database is used to train the model for image recognition and matching users capabilities. Inside the app server the model will be applied for the notes function.
 
+## Datasets
+### StudyMate
+**StudyBNB** provides StudyMate matching functionality using data such as 'average learning time per day, average number of breaks per day' for users in Firebase DB.
+
+However, data about the number of learning hours and breaks of these users were generally not readily available. Therefore, we created virtual dummy data and used it to check the accuracy of the matching function. In fact, there will be a variety of subjects of interest for users during commercialization, but since we have created dummy data for functional testing, we decided to unify all users' subjects into "TOEIC" and analyze only one subject of TOEIC.
+
+![image](https://user-images.githubusercontent.com/49526312/145223126-03479e21-3456-4ec7-85ff-b7b37788f8a6.png)
+
+
+### Note-taking
+**StudyBNB** provides Optical character recognition (OCR) function that converts images uploaded by users into text.
+
+All Latin-based text can be recognized using ML Kit's text recognition API provided by Google Firebase. Text recognition can automate cumbersome text input, and users can edit extracted text. These data are uploaded to Cloud Firestore whenever the user uses the Note-taking function to check the accuracy of the ML Kit.
+
+![image](https://user-images.githubusercontent.com/49526312/145223082-a46098fd-3639-4362-8932-58b958ed0fcb.png)
+
 ## Methodology
 ### StudyMate
 
