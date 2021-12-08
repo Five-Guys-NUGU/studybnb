@@ -47,6 +47,7 @@ class HistoryNoteWriteActivity : AppCompatActivity() {
 
         back_btn.setOnClickListener {
             myStartActivity(HistoryNoteListActivity::class.java)
+            finish()
         }
 
         img_btn.setOnClickListener {

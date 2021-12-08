@@ -47,6 +47,7 @@ class CsNoteWriteActivity : AppCompatActivity() {
 
         back_btn.setOnClickListener {
             myStartActivity(CsNoteListActivity::class.java)
+            finish()
         }
 
         img_btn.setOnClickListener {
