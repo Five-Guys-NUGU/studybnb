@@ -1,6 +1,6 @@
 # StudyBNB
 HYU AI/SE project 21-2 \
-Learning, friend-like software 'StudyBNB'
+Friend-like software that helps us study efficiently 'StudyBNB'
 
 ## Members
 - Kim Useong, jeneve1@hanyang.ac.kr
@@ -12,10 +12,11 @@ Learning, friend-like software 'StudyBNB'
 ## Links
 - Notion page: https://ancient-fighter-d30.notion.site/StudyBNB-c63a5795d9de42758a436764d5bca04d
 - Explanation & Demo Video: 
-- Documentation: 
+- Documentation: https://github.com/Five-Guys-NUGU/documentation
 
 ## Proposal
 Studying and reading is always present in our daily life, especially as a college student. When we study, it is easy to lose track of the hours spent and forgetting to take breaks. This results in being inefficient for the goal of studying for a class or an exam. Conversely, it is easy to lose concentration due to the temptation to use laptops and cell phones. From these cases, we thought that it would be good to students to provide a time-check application for studying. By using our application, students can see whether they should have rest at proper time, and they can focus on their study more. The ultimate question to answer is always "How can I be more efficient with my time for studying?" 
+
 ### Problematic Situation
 - Can't check own study time exactly
 - Memorization that relies only on sight
@@ -25,19 +26,17 @@ Studying and reading is always present in our daily life, especially as a colleg
 
 ## Related software and research
 ### Yeolpumta(열품타)
+- https://play.google.com/store/apps/details?id=com.pallo.passiontimerscoped
 ### Forest
+- https://play.google.com/store/apps/details?id=cc.forestapp
 ### Focus To-DO: Pomodoro Timer
+- https://play.google.com/store/apps/details?id=com.superelement.pomodoro
 ### QandA
+- https://play.google.com/store/apps/details?id=com.mathpresso.qanda
 ### AI TOEIC - RIIID Tutor
-
+- https://play.google.com/store/apps/details?id=co.riiid.vida
 
 ## Development Environment
-Model | Processor | RAM | OS |
---- | --- | --- | --- |
-MacBook Pro | Intel Core i9, 2.4GHz octa-core | 32GB 2667 MHz DDR4 | macOS Catalina(10.15.7)
-MacBook Air | Intel Core i5, 1.6GHz dual-core | 4GB 1600MHz DDR4 | macOS  Catalina(10.15.7)
-Dell  XPS  15  9570 | Intel  Core  i7-8750h,  2.20GHz | 16GB  2208MHz  DDR4 | Windows 10(10.0.18363 Numero 18363)
-HP  Spectre  x360  Convertible | Intel  Core  i7-8550U,  1.80GHz | 16GB  2208MHz  DDR4 | Windows 10(10.0.18363 Numero 18363
 
 
 
@@ -52,27 +51,27 @@ Backend is represented by the cloud consisting of the backend capabilities of Fi
 ## Methodology
 ### A. StudyMate
 
-- 왜 K-mean Clustering인가
+- Why is it K-mean Clustering?
     
-    저희는 매칭 알고리즘으로 K-mean Clustering 기법을 사용하였습니다. 저희는 많은 사용자들 중 같은 과목을 학습하는 사용자들 중 가장 유사한 두 사용자를 하나의 매칭 그룹으로 만들고 싶었습니다. 사용자 정보에 대한 label이 따로 존재하지 않았으므로, 저희는 머신러닝 기법들 중 Clustering을 이용하여 사용자들을 여러 군집으로 나눈 후, 각각의 군집에서 무작위로 두 사용자를 택하여 매칭시키는 방법을 택하기로 하였습니다.
+    We used 'K-mean clustering' as a matching algorithm. We wanted to make two of the most similar users among those learning the same subject into one matching group. Since there was no label that indicates user information, we decided to divide users into several clusters using clustering among machine learning techniques and randomly select and match two users in each cluster.
+
+    One of the clustering techniques, the K-mean clustering technique, does not need to set the number of clusters in advance and searches for similar clusters based on Euclidean distance, so we thought it was suitable for the purpose of matching two highly similar objects.
     
-    Clustering 기법들 중 하나인 K-mean Clustering 기법은 군집의 수를 미리 정할 필요가 없고, 유클리드 거리 기반으로 유사 군집을 탐색하기 때문에 저희가 원하는 바대로, 유사도 높은 두 개체를 매칭시킨다는 목적에 적합하다고 생각했습니다.
+- Data Normalization
     
-- 데이터 정규화
-    
-    raw data를 그대로 Clustering에 사용하는 것과 데이터 정규화를 거치고 난 후 Clustering을 진행하는 것은 큰 차이가 있습니다. raw data를 그대로 사용할 경우, scale이 더 큰 feature의 영향력이 그렇지 않은 feature의 영향력보다 지나치게 커질 수 있습니다. 우리는 그러한 현상을 방지하고자 정규화 과정을 거치기로 했습니다.
+    There is a big difference between using raw data as it is for clustering and proceeding with clustering after data normalization. If raw data is used as it is, the influence of features with a larger scale can be too large than those of features that do not. We decided to go through a normalization process to prevent such a phenomenon.
     
     ```python
     sdscaler = StandardScaler()
     df[['total_study_time', 'avg_study_time']] = sdscaler.fit_transform(df[['total_study_time', 'avg_study_time']])
     ```
     
-- 최적의 K 찾기
+- Finding Best K
     
-    군집의 수를 미리 정하지 않아도 K-mean Clustering은 동작하지만, 만약 K의 범위를 정하지 않는다면 두 가지 문제가 생길 수 있습니다. 만일 K가 너무 적은 숫자가 될 경우 거의 모든 사용자가 같은 군집에 속하게 되어, 이 매칭 알고리즘을 돌리는 이유가 없어질 지도 모릅니다. 반대로 K가 너무 큰 숫자가 될 경우 사용자들이 매우 많은 군집으로 분화되어 많은 사용자가 매칭이 이루어지지 않는 경우가 많이 생길 수도 있습니다. 한 군집에 사용자가 홀수 명 있을 경우 한 명의 사용자는 매칭에 실패하게 되기 때문입니다.
-    
-    따라서 저희는 K의 범위를 정하고 그 범위 내에서 전체 사용자를 가장 특색 있는 군집으로 나눌 수 있는, 최적의 K를 찾기로 했습니다. K가 너무 적은 값도 너무 큰 값도 아닌 적당한 값을 가지게 하기 위해, 2 $≤$ K $≤$ $round(\sqrt{n})$ 의 범위를 만족하는 자연수 K 중 가장 높은 Silhouette Score를 가지는 K를 최적의 K로 간주하기로 하였습니다.
-    
+    K-mean clustering works even if the number of clusters is not determined in advance, but if the range of K is not determined, there can be two problems. If K becomes too small a number, almost all users will belong to the same cluster, and there may be no reason to turn this matching algorithm around. Conversely, if K becomes too large a number, users may differentiate into very large clusters, and many users may not be matched. This is because if there are odd numbers of users in one cluster, one user will fail to match.
+
+    Therefore, we decided to determine the range of K and find the optimal K that can divide all users into the most distinctive clusters within that range. To ensure that K has a reasonable value, not too little or too large, we consider K with the highest Silhouette Score among natural numbers K satisfying the range of 2 <= K <= `round(root(N))` as optimal K.    
+
     ```python
     def findBestK(df):
         sil = []
@@ -88,7 +87,7 @@ Backend is represented by the cloud consisting of the backend capabilities of Fi
     
 - K-mean Clustering
     
-    찾아낸 최적의 K를 이용하여, K-mean Clustering을 진행하였습니다.
+    K-mean clustering was conducted using the optimal K found.
     
     ```python
     def kmean(df, k):
@@ -97,9 +96,9 @@ Backend is represented by the cloud consisting of the backend capabilities of Fi
         return labels
     ```
     
-- 각각의 Cluster 내에서 매칭하기
+- Matching inside each clusters
     
-    Clustering 결과인 각각의 군집 내에서 랜덤하게 두 사용자를 골라 매칭시켰습니다. 만약, 군집이 홀수 명의 사용자로 구성된다면, 마지막 한 명의 사용자는 매칭에 실패하게 됩니다.
+    Two users were randomly selected and matched within each cluster of clustering results. If the cluster consists of an odd number of users, the last one user will fail to match.
     
     ```python
     def match(lists):
@@ -123,7 +122,8 @@ Backend is represented by the cloud consisting of the backend capabilities of Fi
 
 - OCR in Android Application
     
-    앱 내에서 OCR의 구현 방식은 다음과 같습니다. 이미지 속 텍스트를 인식하기 위해선 `Bitmap` 또는 `media.Image`, `ByteBuffer`, 바이트 배열 또는 기기의 파일에서 `FirebaseVisionImage` 객체를 만듭니다. 그런 다음 `FirebaseVisionImage` 객체를 `FirebaseVisionTextRecognizer`의 `processImage` 메서드에 전달하고, 태스크가 수행되면 이미지는 텍스트로 변환됩니다.
+    The implementation method of OCR within the app is as follows. To recognize the text in the image, create an object called `Bitmap`, `media.image`, `ByteBuffer`, and `Firebase VisionImage` from a byte array or device file. The `Firebase VisionImage` object is then forwarded to the `processImage` method of `Firebase VisionTextRecognizer`, and when the task is performed, the image is converted into text.
+
     
 
 ```kotlin
@@ -154,3 +154,47 @@ if(requestCode == 0 && resultCode == Activity.RESULT_OK && data != null){
         }
     }
 ```
+## Evaluation & Analysis
+### A. StudyMate
+
+- Before / After Normalization
+    
+    Before normalization, the scale of 'total_study_time' is very large compared to 'avg_study_time', whereas after normalization, the two features show the same scale.
+    
+    Before Normalization             |  After Normalization
+    :-------------------------:|:-------------------------:
+    ![image](https://user-images.githubusercontent.com/49526312/145191795-9cc58ede-9a2b-4f8a-8da1-0d8d7df27e27.png)  |  ![image](https://user-images.githubusercontent.com/49526312/145191813-b44c5313-8e3c-415f-828a-a8dd9bb057d0.png)
+- Silhouette Score
+    
+    Silhouette Score, which determines the best K, shows that it is better to set it to K=4 for the case.
+    
+    ![image](https://user-images.githubusercontent.com/49526312/145191706-aa410883-c4dc-4fc9-b305-e63c0f83db5c.png)
+    
+- K-mean Clustering Result
+    
+    This graph visualizes the results of K-mean clustering. Each cluster is expressed in a different color.
+    
+    ![image](https://user-images.githubusercontent.com/49526312/145191624-0ab0cb22-bfd6-41b1-aee5-bf75f42db9d7.png)
+
+
+### B. Note-taking
+
+- Data recognition accuracy was checked by comparing/analyzing the similarity between the text in the image and the text converted into the image.
+- As a result of analyzing the accuracy of data recognition by collecting about 30 pieces of data, it showed about 98.6% accuracy.
+
+## Use cases
+### Mobile application
+
+
+### NUGU AI Speaker
+
+
+## User guide
+### Installation
+
+### Deletion
+
+## Conclusion
+When we first started our development plan, we planned to provide two paths: smartphone apps and AI speakers with two AI-based services: StudyMate and Note-taking.
+
+However, due to limited development capabilities and time constraints, we had no choice but to produce slightly modified results from the initial plan. Among the many parts, the most regrettable thing is that the StudyMate function was not fully implemented in the app. If the service can be expanded as planned, I think we can make it more functionally completed software.
