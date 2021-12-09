@@ -11,6 +11,7 @@ Friend-like software that helps us study efficiently, 'StudyBNB'
 
 ## Links
 - Notion page: https://ancient-fighter-d30.notion.site/StudyBNB-c63a5795d9de42758a436764d5bca04d
+- Presentation Video: https://youtu.be/kBrq5Cp0K_0
 - Demo Video: https://www.youtube.com/watch?v=EPOi7vhCWR0
 - Documentation: https://github.com/Five-Guys-NUGU/documentation
 
