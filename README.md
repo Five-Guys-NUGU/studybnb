@@ -5,7 +5,6 @@ Friend-like software that helps us study efficiently, 'StudyBNB'
 ## Members
 - Kim Useong, jeneve1@hanyang.ac.kr
 - Park Hankyu, official03x@hanyang.ac.kr
-- Lim Dongjin, ehdwlsdudwo1@hanyang.ac.kr
 - Chi Sangyun, csy9604@hanyang.ac.kr
 - Michael Sklors, skmi1013@h-ka.de
 
